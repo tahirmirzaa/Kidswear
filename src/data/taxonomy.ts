@@ -58,15 +58,16 @@ export const mainNav = [
 export interface LaunchSize {
   label: string;
   slug: string;
+  image: string;
 }
 
 // The four proposed launch sizes (ages 2-6). Product `sizes` arrays use these exact
 // labels already, so shop-by-size filters on `sizes`, not the broader `ageGroups` bands.
 export const launchSizes: LaunchSize[] = [
-  { label: "2-3Y", slug: "2-3y" },
-  { label: "3-4Y", slug: "3-4y" },
-  { label: "4-5Y", slug: "4-5y" },
-  { label: "5-6Y", slug: "5-6y" },
+  { label: "2-3Y", slug: "2-3y", image: realPhoto("1634188157846-c6e3bdf99420") },
+  { label: "3-4Y", slug: "3-4y", image: realPhoto("1516890896652-41ca1a35787c") },
+  { label: "4-5Y", slug: "4-5y", image: realPhoto("1519226135464-df5a9dbcd2a5") },
+  { label: "5-6Y", slug: "5-6y", image: realPhoto("1584225065315-a502458625ce") },
 ];
 
 export interface LaunchCollectionCard {

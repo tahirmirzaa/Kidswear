@@ -15,6 +15,7 @@ export default function AgePage() {
     <ProductListing
       title={`Size ${size.label}`}
       description={`Everyday Sets and Nightwear in size ${size.label}.`}
+      bannerImage={size.image}
       breadcrumbLabel={size.label}
       products={filtered}
     />
@@ -28,7 +29,14 @@ export function ShopByAgeIndex() {
       <p className="mt-2 max-w-md text-sm text-ink-soft">Our launch range covers ages 2-6. Find their perfect fit.</p>
       <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-4">
         {launchSizes.map((size) => (
-          <Link key={size.slug} to={`/shop-by-age/${size.slug}`} className="flex flex-col items-center gap-3 rounded-2xl border border-line p-6 text-center hover:border-ink">
+          <Link key={size.slug} to={`/shop-by-age/${size.slug}`} className="group flex flex-col items-center gap-3 text-center">
+            <div className="aspect-square w-full overflow-hidden rounded-full bg-ivory-dark">
+              <img
+                src={size.image}
+                alt={size.label}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
             <p className="text-lg font-semibold text-ink">{size.label}</p>
           </Link>
         ))}
