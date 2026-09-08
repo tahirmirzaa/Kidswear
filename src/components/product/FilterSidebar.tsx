@@ -1,12 +1,13 @@
 import { AccordionItem } from "../ui/Accordion";
 import ColorSwatch from "../ui/ColorSwatch";
 import type { FilterState } from "../../hooks/useProductFilters";
+import { launchFilterOptions } from "../../data/products";
 import { formatINR } from "../../lib/utils";
 
-const AGE_OPTIONS = ["Newborn", "0-2 Years", "2-5 Years", "5-8 Years", "8-12 Years", "12-14 Years"];
+const AGE_OPTIONS = launchFilterOptions.ageGroups;
 const GENDER_OPTIONS = ["girls", "boys", "unisex"];
-const CATEGORY_OPTIONS = ["Baby", "Girls", "Boys", "Occasion Wear", "Nightwear", "Accessories"];
-const SIZE_OPTIONS = ["0-3M", "3-6M", "6-9M", "9-12M", "12-18M", "1-2Y", "2-3Y", "3-4Y", "4-5Y", "5-6Y", "6-7Y", "7-8Y", "8-9Y", "9-10Y", "10-12Y", "12-14Y", "One Size"];
+const CATEGORY_OPTIONS = launchFilterOptions.categories;
+const SIZE_OPTIONS = launchFilterOptions.sizes;
 const COLOR_OPTIONS = [
   { name: "Ivory", hex: "#FAF7F2" },
   { name: "Blush Pink", hex: "#F3D9D6" },
@@ -23,8 +24,8 @@ const COLOR_OPTIONS = [
   { name: "Festive Gold", hex: "#C9A24B" },
   { name: "Washed Indigo", hex: "#465A78" },
 ];
-const FABRIC_OPTIONS = ["Organic Cotton", "Cotton Blend", "Muslin", "Linen", "Fleece", "Silk Blend", "Denim"];
-const OCCASION_OPTIONS = ["Festive", "Birthday", "Casual", "Holiday", "Gifting"];
+const FABRIC_OPTIONS = launchFilterOptions.fabrics;
+const OCCASION_OPTIONS = launchFilterOptions.occasions;
 
 interface FilterSidebarProps {
   filters: FilterState;
@@ -42,7 +43,7 @@ function CheckboxRow({ label, checked, onChange }: { label: string; checked: boo
         type="checkbox"
         checked={checked}
         onChange={onChange}
-        className="h-4 w-4 rounded border-line accent-terracotta"
+        className="h-4 w-4 rounded border-line accent-burgundy"
       />
       <span className={checked ? "text-ink" : ""}>{label}</span>
     </label>
@@ -55,7 +56,7 @@ export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setIn
       <div className="flex items-center justify-between pb-3">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-ink">Filters</h2>
         {activeCount > 0 && (
-          <button onClick={resetFilters} className="text-xs font-medium text-terracotta">
+          <button onClick={resetFilters} className="text-xs font-medium text-burgundy">
             Clear all ({activeCount})
           </button>
         )}
@@ -112,7 +113,7 @@ export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setIn
             step={100}
             value={filters.maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full accent-terracotta"
+            className="w-full accent-burgundy"
           />
           <div className="mt-1 flex justify-between text-xs text-ink-soft">
             <span>{formatINR(500)}</span>

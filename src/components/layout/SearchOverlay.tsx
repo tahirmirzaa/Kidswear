@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Search, X } from "lucide-react";
-import { products } from "../../data/products";
+import { launchProducts } from "../../data/products";
 import { formatINR } from "../../lib/utils";
 
 export default function SearchOverlay({ onClose }: { onClose: () => void }) {
@@ -18,7 +18,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   const results = query.trim()
-    ? products
+    ? launchProducts
         .filter((p) => p.name.toLowerCase().includes(query.toLowerCase()) || p.category.toLowerCase().includes(query.toLowerCase()))
         .slice(0, 6)
     : [];
@@ -40,7 +40,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && goToResults()}
-            placeholder="Search for frocks, rompers, kurta sets..."
+            placeholder="Search for frocks, co-ord sets, pajamas..."
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-ink-soft/50"
           />
           <button onClick={onClose} aria-label="Close search" className="rounded-full p-1 hover:bg-ivory-dark">
@@ -66,7 +66,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
                 </div>
               </button>
             ))}
-            <button onClick={goToResults} className="py-3 text-left text-sm font-medium text-terracotta">
+            <button onClick={goToResults} className="py-3 text-left text-sm font-medium text-burgundy">
               See all results for "{query}"
             </button>
           </div>
@@ -80,7 +80,7 @@ export default function SearchOverlay({ onClose }: { onClose: () => void }) {
           <div className="mt-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">Popular Searches</p>
             <div className="flex flex-wrap gap-2">
-              {["Frocks", "Kurta Set", "Rompers", "Nightwear", "Dungaree", "Sherwani"].map((term) => (
+              {["Frocks", "Co-ord Set", "Shirt & Shorts", "Pajama Set", "Nightdress", "Overshirt"].map((term) => (
                 <button
                   key={term}
                   onClick={() => setQuery(term)}

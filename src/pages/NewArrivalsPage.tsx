@@ -1,13 +1,13 @@
 import ProductListing from "../components/product/ProductListing";
-import { newArrivals } from "../data/products";
+import { launchProducts } from "../data/products";
 
 export default function NewArrivalsPage() {
   return (
     <ProductListing
-      title="New Arrivals"
-      description="Fresh prints and silhouettes, dropped this week."
-      breadcrumbLabel="New Arrivals"
-      products={newArrivals}
+      title="Shop All"
+      description="Our full launch range: cotton Everyday Sets and Nightwear for ages 2-6."
+      breadcrumbLabel="Shop All"
+      products={launchProducts}
     />
   );
 }

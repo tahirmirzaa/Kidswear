@@ -50,6 +50,13 @@ interface Template {
   outOfStockIn?: number[];
 }
 
+// Launch range = cotton/cotton-blend, Casual-occasion templates whose sizes cover
+// the four proposed launch sizes (2-3Y/3-4Y/4-5Y/5-6Y). Everything else stays in the
+// data file as a draft so it can come back without re-authoring, but is hidden from
+// every customer-facing surface until it's genuinely part of a launch drop.
+const EVERYDAY_SEED_TAGS = new Set(["tiered-frock", "coord-girls", "corduroy-pinafore", "shirt-shorts", "polo-chino", "overshirt"]);
+const NIGHTWEAR_SEED_TAGS = new Set(["pajama-print", "nightdress"]);
+
 const BABY_SIZES = ["0-3M", "3-6M", "6-9M", "9-12M", "12-18M"];
 const TODDLER_SIZES = ["1-2Y", "2-3Y", "3-4Y"];
 const KIDS_SIZES = ["4-5Y", "5-6Y", "6-7Y", "7-8Y"];
@@ -482,8 +489,10 @@ function buildProducts(): Product[] {
         inStock: !(t.outOfStockIn || []).includes(variantIdx),
         rating,
         reviewCount,
-        reviews: buildReviews(seed, Math.min(5, Math.max(2, reviewCount % 5 + 2)), id),
+        reviews: buildReviews(seed, Math.min(5, Math.max(2, reviewCount % 5 + 2)), id, t.ageGroups),
         tags: [t.category, t.gender, t.fabric],
+        launchVisible: EVERYDAY_SEED_TAGS.has(t.seedTag) || NIGHTWEAR_SEED_TAGS.has(t.seedTag),
+        launchCollection: EVERYDAY_SEED_TAGS.has(t.seedTag) ? "everyday-sets" : NIGHTWEAR_SEED_TAGS.has(t.seedTag) ? "nightwear" : undefined,
       });
     });
   });
@@ -492,6 +501,7 @@ function buildProducts(): Product[] {
 }
 
 export const products: Product[] = buildProducts();
+export const launchProducts: Product[] = products.filter((p) => p.launchVisible);
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
@@ -502,17 +512,34 @@ export function getProductById(id: string): Product | undefined {
 }
 
 export function getRelatedProducts(product: Product, count = 4): Product[] {
-  return products
+  return launchProducts
     .filter((p) => p.id !== product.id && p.category === product.category)
     .slice(0, count);
 }
 
 export function getCompleteTheLook(product: Product, count = 4): Product[] {
-  return products
+  return launchProducts
     .filter((p) => p.id !== product.id && p.category !== product.category && p.gender === product.gender)
     .slice(0, count);
 }
 
-export const newArrivals = products.filter((p) => p.isNew);
-export const bestsellers = products.filter((p) => p.isBestseller);
-export const saleProducts = products.filter((p) => p.discountPrice);
+export const newArrivals = launchProducts;
+export const saleProducts = launchProducts.filter((p) => p.discountPrice);
+
+function uniqueSorted<T>(values: T[]): T[] {
+  return Array.from(new Set(values)).sort();
+}
+
+// Filter sidebar options should only ever offer values that actually exist among the
+// launch products, so a hidden category/age/occasion/fabric can't leak back in as a
+// selectable (and always-empty) filter.
+const SIZE_ORDER = [...BABY_SIZES, ...TODDLER_SIZES, ...KIDS_SIZES, ...TWEEN_SIZES, "One Size"];
+const availableSizes = new Set(launchProducts.flatMap((p) => p.sizes));
+
+export const launchFilterOptions = {
+  ageGroups: uniqueSorted(launchProducts.flatMap((p) => p.ageGroups)),
+  categories: uniqueSorted(launchProducts.map((p) => p.category)),
+  fabrics: uniqueSorted(launchProducts.map((p) => p.fabric)),
+  occasions: uniqueSorted(launchProducts.flatMap((p) => p.occasions)),
+  sizes: SIZE_ORDER.filter((s) => availableSizes.has(s)),
+};

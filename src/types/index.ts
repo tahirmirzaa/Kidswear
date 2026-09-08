@@ -39,7 +39,6 @@ export interface Review {
   date: string;
   title: string;
   body: string;
-  verified: boolean;
   childAge?: string;
 }
 
@@ -70,6 +69,8 @@ export interface Product {
   reviewCount: number;
   reviews: Review[];
   tags?: string[];
+  launchVisible?: boolean;
+  launchCollection?: "everyday-sets" | "nightwear";
 }
 
 export interface CartItem {

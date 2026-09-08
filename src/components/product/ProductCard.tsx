@@ -36,7 +36,6 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
           {product.isNew && <Badge variant="new">New</Badge>}
-          {product.isBestseller && <Badge variant="bestseller">Bestseller</Badge>}
           {!product.inStock && <Badge variant="outofstock">Out of Stock</Badge>}
         </div>
 
@@ -46,7 +45,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           aria-pressed={wishlisted}
           className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-soft transition-transform hover:scale-105"
         >
-          <Heart size={16} className={wishlisted ? "fill-terracotta text-terracotta" : "text-ink"} />
+          <Heart size={16} className={wishlisted ? "fill-burgundy text-burgundy" : "text-ink"} />
         </button>
 
         {onQuickView && (

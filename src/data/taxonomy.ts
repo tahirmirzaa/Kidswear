@@ -49,13 +49,44 @@ export const occasions: OccasionCard[] = [
 ];
 
 export const mainNav = [
-  { label: "New Arrivals", to: "/new-arrivals" },
-  { label: "Baby", to: "/category/baby" },
-  { label: "Girls", to: "/category/girls" },
-  { label: "Boys", to: "/category/boys" },
-  { label: "Shop by Age", to: "/shop-by-age" },
-  { label: "Occasion Wear", to: "/category/occasion-wear" },
-  { label: "Accessories", to: "/category/accessories" },
-  { label: "Gifting", to: "/occasion/gifting" },
-  { label: "Sale", to: "/sale" },
+  { label: "Shop All", to: "/new-arrivals" },
+  { label: "Everyday Sets", to: "/category/everyday-sets" },
+  { label: "Nightwear", to: "/category/nightwear" },
+  { label: "Our Story", to: "/about" },
+];
+
+export interface LaunchSize {
+  label: string;
+  slug: string;
+}
+
+// The four proposed launch sizes (ages 2-6). Product `sizes` arrays use these exact
+// labels already, so shop-by-size filters on `sizes`, not the broader `ageGroups` bands.
+export const launchSizes: LaunchSize[] = [
+  { label: "2-3Y", slug: "2-3y" },
+  { label: "3-4Y", slug: "3-4y" },
+  { label: "4-5Y", slug: "4-5y" },
+  { label: "5-6Y", slug: "5-6y" },
+];
+
+export interface LaunchCollectionCard {
+  slug: "everyday-sets" | "nightwear";
+  label: string;
+  description: string;
+  image: string;
+}
+
+export const launchCollections: LaunchCollectionCard[] = [
+  {
+    slug: "everyday-sets",
+    label: "Everyday Sets",
+    description: "Cotton staples built for play, every single day.",
+    image: realPhoto("1599376672737-bd66af54c8f5"),
+  },
+  {
+    slug: "nightwear",
+    label: "Nightwear",
+    description: "Breathable cotton sets for sound sleep.",
+    image: realPhoto("1771419912747-df33d91c329d"),
+  },
 ];

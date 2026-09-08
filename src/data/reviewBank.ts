@@ -82,20 +82,45 @@ export const reviewBank: ReviewSeed[] = [
   },
 ];
 
-export function buildReviews(seedIndex: number, count: number, idPrefix: string): Review[] {
+const AGE_GROUP_RANGES: Record<string, [number, number]> = {
+  Newborn: [0, 0.3],
+  "0-2 Years": [0, 2],
+  "2-5 Years": [2, 5],
+  "5-8 Years": [5, 8],
+  "8-12 Years": [8, 12],
+  "12-14 Years": [12, 14],
+};
+
+function childAgeInYears(childAge: string): number {
+  if (/newborn/i.test(childAge)) return 0;
+  const match = childAge.match(/(\d+)-year-old/);
+  return match ? Number(match[1]) : 5;
+}
+
+function isAgeCompatible(childAge: string, ageGroups: string[]): boolean {
+  const years = childAgeInYears(childAge);
+  return ageGroups.some((group) => {
+    const range = AGE_GROUP_RANGES[group];
+    return !range || (years >= range[0] && years <= range[1]);
+  });
+}
+
+export function buildReviews(seedIndex: number, count: number, idPrefix: string, ageGroups: string[]): Review[] {
+  const pool = reviewBank.filter((r) => isAgeCompatible(r.childAge, ageGroups));
+  const source = pool.length > 0 ? pool : reviewBank;
+  const actualCount = Math.min(count, source.length);
   const reviews: Review[] = [];
-  for (let i = 0; i < count; i++) {
-    const source = reviewBank[(seedIndex + i) % reviewBank.length];
-    const rating = 4 + ((seedIndex + i) % 2 === 0 ? 1 : 0) - (i === count - 1 && count > 3 ? 1 : 0);
+  for (let i = 0; i < actualCount; i++) {
+    const entry = source[(seedIndex + i) % source.length];
+    const rating = 4 + ((seedIndex + i) % 2 === 0 ? 1 : 0) - (i === actualCount - 1 && actualCount > 3 ? 1 : 0);
     reviews.push({
       id: `${idPrefix}-rev-${i + 1}`,
-      author: source.author,
+      author: entry.author,
       rating: Math.min(5, Math.max(3, rating)),
       date: new Date(2026, (seedIndex + i) % 8, ((seedIndex * 3 + i * 7) % 27) + 1).toISOString(),
-      title: source.title,
-      body: source.body,
-      verified: (seedIndex + i) % 4 !== 0,
-      childAge: source.childAge,
+      title: entry.title,
+      body: entry.body,
+      childAge: entry.childAge,
     });
   }
   return reviews;

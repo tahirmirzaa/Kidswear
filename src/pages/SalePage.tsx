@@ -5,7 +5,7 @@ export default function SalePage() {
   return (
     <ProductListing
       title="Sale"
-      description="Loved styles, now at a little less."
+      description="A few launch styles at a little less."
       breadcrumbLabel="Sale"
       products={saleProducts}
     />

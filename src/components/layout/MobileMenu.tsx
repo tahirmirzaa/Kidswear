@@ -11,9 +11,7 @@ export default function MobileMenu({ open, onClose }: { open: boolean; onClose: 
             key={item.label}
             to={item.to}
             onClick={onClose}
-            className={`border-b border-line px-4 py-3.5 text-sm font-medium ${
-              item.label === "Sale" ? "text-sale" : "text-ink"
-            }`}
+            className="border-b border-line px-4 py-3.5 text-sm font-medium text-ink"
           >
             {item.label}
           </Link>

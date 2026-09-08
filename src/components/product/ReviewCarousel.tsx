@@ -29,7 +29,7 @@ export default function ReviewCarousel({ reviews }: { reviews: Review[] }) {
             <h3 className="mt-2 text-sm font-semibold text-ink">{r.title}</h3>
             <p className="mt-1 text-sm leading-relaxed text-ink-soft">{r.body}</p>
             <p className="mt-3 text-xs font-medium text-ink-soft">
-              {r.author} {r.verified && <span className="text-sage-dark">· Verified Purchase</span>} · {r.childAge}
+              {r.author} · {r.childAge}
             </p>
           </div>
         ))}

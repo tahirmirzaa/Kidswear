@@ -19,7 +19,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
 import { useToast } from "../context/ToastContext";
-import { categories } from "../data/taxonomy";
+import { launchCollections } from "../data/taxonomy";
 import type { Product } from "../types";
 import NotFound from "./NotFound";
 
@@ -45,7 +45,9 @@ function ProductDetailContent({ product }: { product: Product }) {
   const recentlyViewed = useRecentlyViewed(product.id).filter((p) => p.id !== product.id);
   const related = useMemo(() => getRelatedProducts(product), [product]);
   const completeLook = useMemo(() => getCompleteTheLook(product), [product]);
-  const categorySlug = categories.find((c) => c.label === product.category)?.slug ?? "";
+  const collection = launchCollections.find((c) => c.slug === product.launchCollection);
+  const collectionLabel = collection?.label ?? product.category;
+  const collectionTo = collection ? `/category/${collection.slug}` : "/new-arrivals";
 
   const handleAddToBag = () => {
     if (addedToBag) {
@@ -81,7 +83,7 @@ function ProductDetailContent({ product }: { product: Product }) {
 
   return (
     <div className="container-page py-6">
-      <Breadcrumb items={[{ label: product.category, to: `/category/${categorySlug}` }, { label: product.name }]} />
+      <Breadcrumb items={[{ label: collectionLabel, to: collectionTo }, { label: product.name }]} />
 
       <div className="mt-5 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8 lg:gap-14">
         <ProductGallery
@@ -93,7 +95,7 @@ function ProductDetailContent({ product }: { product: Product }) {
 
         <div className="flex flex-col gap-5">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-terracotta">{product.category}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-burgundy">{product.category}</p>
             <h1 className="mt-1 font-serif text-3xl text-ink sm:text-4xl">{product.name}</h1>
             <div className="mt-2 flex items-center gap-3">
               <Rating value={product.rating} showValue count={product.reviewCount} />
@@ -118,7 +120,7 @@ function ProductDetailContent({ product }: { product: Product }) {
               <p className="text-xs font-semibold uppercase tracking-wide text-ink">
                 Age / Size {size && <span className="font-normal text-ink-soft">· {size}</span>}
               </p>
-              <button onClick={() => setSizeGuideOpen(true)} className="text-xs font-medium text-terracotta underline underline-offset-2">
+              <button onClick={() => setSizeGuideOpen(true)} className="text-xs font-medium text-burgundy underline underline-offset-2">
                 Size Guide
               </button>
             </div>
@@ -152,7 +154,7 @@ function ProductDetailContent({ product }: { product: Product }) {
           <div className="grid grid-cols-1 gap-3 rounded-xl bg-sage/30 p-4 sm:grid-cols-2">
             {product.benefits.map((b) => (
               <div key={b} className="flex items-center gap-2 text-xs text-ink-soft">
-                <Sparkles size={14} className="shrink-0 text-terracotta" /> {b}
+                <Sparkles size={14} className="shrink-0 text-burgundy" /> {b}
               </div>
             ))}
           </div>
@@ -175,13 +177,13 @@ function ProductDetailContent({ product }: { product: Product }) {
             <AccordionItem title="Delivery & Returns">
               <div className="flex flex-col gap-2">
                 <span className="flex items-center gap-2">
-                  <Truck size={15} className="text-terracotta" /> Free delivery on prepaid orders above ₹1,499
+                  <Truck size={15} className="text-burgundy" /> Free delivery on prepaid orders above ₹1,499
                 </span>
                 <span className="flex items-center gap-2">
-                  <RotateCcw size={15} className="text-terracotta" /> 15-day easy returns & exchanges
+                  <RotateCcw size={15} className="text-burgundy" /> 15-day easy returns & exchanges
                 </span>
                 <span className="flex items-center gap-2">
-                  <ShieldCheck size={15} className="text-terracotta" /> Quality checked before dispatch
+                  <ShieldCheck size={15} className="text-burgundy" /> Quality checked before dispatch
                 </span>
               </div>
             </AccordionItem>
@@ -216,8 +218,8 @@ function ProductDetailContent({ product }: { product: Product }) {
       )}
 
       <div className="mt-10 flex justify-center">
-        <Link to={`/category/${categorySlug}`} className="text-sm font-medium text-ink underline underline-offset-4">
-          Back to {product.category}
+        <Link to={collectionTo} className="text-sm font-medium text-ink underline underline-offset-4">
+          Back to {collectionLabel}
         </Link>
       </div>
 
