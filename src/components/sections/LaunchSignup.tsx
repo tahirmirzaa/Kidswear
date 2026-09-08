@@ -41,14 +41,20 @@ export default function LaunchSignup() {
           Be the first to know when we open for orders. No spam, just one email when we launch.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 flex w-full max-w-sm flex-col gap-3">
-          <Input
-            label="Email Address"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-          />
+        <form onSubmit={handleSubmit} className="mt-6 flex w-full max-w-md flex-col gap-2">
+          <div className="flex w-full flex-col gap-2 sm:flex-row">
+            <Input
+              aria-label="Email Address"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              wrapperClassName="flex-1"
+            />
+            <Button type="submit" variant="primary" size="lg" className="shrink-0">
+              Notify Me
+            </Button>
+          </div>
           <label className="flex items-start gap-2.5 text-left text-xs text-ink-soft">
             <input
               type="checkbox"
@@ -59,9 +65,6 @@ export default function LaunchSignup() {
             I'd like to receive an email when Pip & Panda launches.
           </label>
           {error && <p className="text-left text-xs text-sale">{error}</p>}
-          <Button type="submit" variant="primary" size="lg" fullWidth>
-            Notify Me
-          </Button>
         </form>
       </div>
     </section>
