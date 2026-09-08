@@ -6,8 +6,9 @@ const sections = [
     icon: <Truck size={20} />,
     title: "Shipping Policy",
     points: [
+      "We accept prepaid orders only; Cash on Delivery is not available.",
       "Standard delivery takes 3–6 business days; metro cities typically see 2–4 days.",
-      "Free shipping on prepaid orders of ₹1,499 or more. A flat ₹79 fee applies below this amount.",
+      "Free shipping on orders of ₹1,499 or more. A flat ₹79 fee applies below this amount.",
       "You'll receive tracking details via SMS and email once your order ships.",
     ],
   },
@@ -15,7 +16,7 @@ const sections = [
     icon: <RotateCcw size={20} />,
     title: "Returns & Exchanges",
     points: [
-      "Easy 15-day return and exchange window from the date of delivery.",
+      "7-day return and exchange window, starting from the date your order is delivered.",
       "Items must be unworn, unwashed, and returned with original tags attached.",
       "Free pickup is arranged from your delivery address for eligible returns.",
       "Items marked 'Final Sale' are not eligible for return.",
@@ -26,7 +27,7 @@ const sections = [
     title: "Refund Timeline",
     points: [
       "Refunds are processed within 5–7 business days after the item passes quality check.",
-      "Amount is credited to the original payment method, or as store credit for COD orders.",
+      "Amount is credited to your original payment method.",
       "You'll receive a confirmation email once your refund has been processed.",
     ],
   },

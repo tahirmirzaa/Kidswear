@@ -5,23 +5,23 @@ import { getProductBySlug, getRelatedProducts, getCompleteTheLook } from "../dat
 import Breadcrumb from "../components/ui/Breadcrumb";
 import ProductGallery from "../components/product/ProductGallery";
 import PriceTag from "../components/ui/PriceTag";
-import Rating from "../components/ui/Rating";
 import ColorSwatch from "../components/ui/ColorSwatch";
 import Button from "../components/ui/Button";
 import Accordion, { AccordionItem } from "../components/ui/Accordion";
 import PincodeCheck from "../components/product/PincodeCheck";
 import SizeGuideModal from "../components/product/SizeGuideModal";
 import ProductCarousel from "../components/product/ProductCarousel";
-import ReviewCarousel from "../components/product/ReviewCarousel";
 import QuickViewModal from "../components/product/QuickViewModal";
 import SectionHeading from "../components/ui/SectionHeading";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
 import { useToast } from "../context/ToastContext";
-import { launchCollections } from "../data/taxonomy";
+import { launchCollections, launchSizes } from "../data/taxonomy";
 import type { Product } from "../types";
 import NotFound from "./NotFound";
+
+const LAUNCH_SIZE_LABELS = launchSizes.map((s) => s.label);
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -48,6 +48,7 @@ function ProductDetailContent({ product }: { product: Product }) {
   const collection = launchCollections.find((c) => c.slug === product.launchCollection);
   const collectionLabel = collection?.label ?? product.category;
   const collectionTo = collection ? `/category/${collection.slug}` : "/new-arrivals";
+  const availableSizes = product.sizes.filter((s) => LAUNCH_SIZE_LABELS.includes(s));
 
   const handleAddToBag = () => {
     if (addedToBag) {
@@ -97,9 +98,6 @@ function ProductDetailContent({ product }: { product: Product }) {
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-burgundy">{product.category}</p>
             <h1 className="mt-1 font-serif text-3xl text-ink sm:text-4xl">{product.name}</h1>
-            <div className="mt-2 flex items-center gap-3">
-              <Rating value={product.rating} showValue count={product.reviewCount} />
-            </div>
           </div>
 
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
@@ -125,7 +123,7 @@ function ProductDetailContent({ product }: { product: Product }) {
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {product.sizes.map((s) => (
+              {availableSizes.map((s) => (
                 <button
                   key={s}
                   onClick={() => selectSize(s)}
@@ -137,7 +135,7 @@ function ProductDetailContent({ product }: { product: Product }) {
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-xs text-ink-soft">Suitable for: {product.ageGroups.join(", ")}</p>
+            <p className="mt-2 text-xs text-ink-soft">Suitable for ages 2-6</p>
           </div>
 
           <Button variant="primary" size="lg" fullWidth disabled={!product.inStock} onClick={handleAddToBag}>
@@ -180,7 +178,7 @@ function ProductDetailContent({ product }: { product: Product }) {
                   <Truck size={15} className="text-burgundy" /> Free delivery on prepaid orders above ₹1,499
                 </span>
                 <span className="flex items-center gap-2">
-                  <RotateCcw size={15} className="text-burgundy" /> 15-day easy returns & exchanges
+                  <RotateCcw size={15} className="text-burgundy" /> 7-day returns & exchanges after delivery
                 </span>
                 <span className="flex items-center gap-2">
                   <ShieldCheck size={15} className="text-burgundy" /> Quality checked before dispatch
@@ -190,11 +188,6 @@ function ProductDetailContent({ product }: { product: Product }) {
           </Accordion>
         </div>
       </div>
-
-      <section className="mt-16 border-t border-line pt-12">
-        <SectionHeading eyebrow="Reviews" title="What Parents Say" />
-        <ReviewCarousel reviews={product.reviews} />
-      </section>
 
       {completeLook.length > 0 && (
         <section className="mt-16 border-t border-line pt-12">

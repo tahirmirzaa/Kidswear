@@ -42,7 +42,7 @@ export const faqs = [
   {
     category: "Orders & Payment",
     items: [
-      { q: "What payment methods do you accept?", a: "We accept all major credit and debit cards, UPI, net banking, and popular wallets. Cash on delivery is available on select pincodes." },
+      { q: "What payment methods do you accept?", a: "We accept prepaid payments only: all major credit and debit cards, UPI, and net banking. Cash on Delivery is not available." },
       { q: "Can I modify or cancel my order after placing it?", a: "You can cancel or edit your order within 2 hours of placing it from the Order Tracking page. After that, our fulfilment team may have already begun packing it." },
       { q: "Do you offer EMI options?", a: "Yes, EMI is available on orders above ₹3,000 through select bank cards at checkout." },
     ],
@@ -58,7 +58,7 @@ export const faqs = [
   {
     category: "Returns & Exchanges",
     items: [
-      { q: "What is your return policy?", a: "We offer a 15-day easy return and exchange window from the date of delivery, provided the tags are intact and the product is unworn." },
+      { q: "What is your return policy?", a: "We offer a 7-day return and exchange window starting from the date your order is delivered, provided the tags are intact and the product is unworn." },
       { q: "How do I initiate a return?", a: "Go to Order Tracking, select the item, and choose 'Return or Exchange'. A pickup will be scheduled from your address." },
       { q: "When will I get my refund?", a: "Refunds are processed within 5–7 business days after the returned item passes quality check." },
     ],

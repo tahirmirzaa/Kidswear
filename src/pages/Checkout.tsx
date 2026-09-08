@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CreditCard, Landmark, Wallet, Truck, ShoppingBag } from "lucide-react";
+import { CreditCard, Landmark, Truck, ShoppingBag } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import Input from "../components/ui/Input";
@@ -8,7 +8,7 @@ import EmptyState from "../components/ui/EmptyState";
 import { formatINR } from "../lib/utils";
 import type { Address } from "../types";
 
-type PaymentMethod = "card" | "upi" | "cod";
+type PaymentMethod = "card" | "upi";
 
 export default function Checkout() {
   const { lines, subtotal } = useCart();
@@ -80,12 +80,12 @@ export default function Checkout() {
           </section>
 
           <section>
-            <h2 className="mb-4 font-serif text-xl text-ink">Payment Method</h2>
+            <h2 className="mb-1 font-serif text-xl text-ink">Payment Method</h2>
+            <p className="mb-4 text-xs text-ink-soft">We accept prepaid payments only. Cash on Delivery is not available.</p>
             <div className="flex flex-col gap-3">
               {[
                 { id: "card" as const, label: "Credit / Debit Card", icon: <CreditCard size={18} /> },
                 { id: "upi" as const, label: "UPI", icon: <Landmark size={18} /> },
-                { id: "cod" as const, label: "Cash on Delivery", icon: <Wallet size={18} /> },
               ].map((opt) => (
                 <label
                   key={opt.id}
