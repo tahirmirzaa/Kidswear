@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, classNam
         ref={ref}
         id={inputId}
         className={cn(
-          "rounded-lg border border-line bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/50 focus:border-terracotta",
+          "rounded-lg border border-line bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/50 focus:border-burgundy",
           error && "border-sale",
           className
         )}

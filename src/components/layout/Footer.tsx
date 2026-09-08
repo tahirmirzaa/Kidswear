@@ -49,7 +49,7 @@ function FooterColumn({ title, links }: (typeof columns)[number]) {
       <ul className={cn("flex flex-col gap-2 overflow-hidden transition-all lg:mt-3 lg:max-h-none lg:overflow-visible", open ? "mt-3 max-h-96" : "max-h-0")}>
         {links.map((l) => (
           <li key={l.label}>
-            <Link to={l.to} className="text-sm text-ink-soft hover:text-terracotta">
+            <Link to={l.to} className="text-sm text-ink-soft hover:text-burgundy">
               {l.label}
             </Link>
           </li>

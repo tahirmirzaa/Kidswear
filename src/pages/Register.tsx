@@ -31,7 +31,8 @@ export default function Register() {
   return (
     <div className="container-page flex justify-center py-16">
       <div className="w-full max-w-sm">
-        <h1 className="text-center font-serif text-3xl text-ink">Create Your Account</h1>
+        <img src="/brand/panda-in-p.png" alt="" className="mx-auto h-14 w-auto" />
+        <h1 className="mt-4 text-center font-serif text-3xl text-ink">Create Your Account</h1>
         <p className="mt-2 text-center text-sm text-ink-soft">Join for early access to new arrivals and 10% off your first order.</p>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
@@ -45,7 +46,7 @@ export default function Register() {
 
         <p className="mt-6 text-center text-sm text-ink-soft">
           Already have an account?{" "}
-          <Link to="/login" className="font-medium text-terracotta">
+          <Link to="/login" className="font-medium text-burgundy">
             Log in
           </Link>
         </p>

@@ -26,7 +26,7 @@ export default function SustainabilityHighlights() {
               key={item.id}
               className="flex w-[70%] flex-none flex-col items-center gap-3 rounded-2xl bg-white/70 p-6 text-center sm:w-[42%] lg:w-1/4"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-terracotta">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-burgundy">
                 {icons[item.icon]}
               </div>
               <h3 className="text-sm font-semibold text-ink">{item.title}</h3>

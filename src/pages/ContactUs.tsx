@@ -34,7 +34,7 @@ export default function ContactUs() {
               rows={5}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="rounded-lg border border-line bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/50 focus:border-terracotta"
+              className="rounded-lg border border-line bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/50 focus:border-burgundy"
               placeholder="How can we help?"
             />
           </div>
@@ -45,7 +45,7 @@ export default function ContactUs() {
 
         <div className="flex flex-col gap-6">
           <div className="flex items-start gap-3">
-            <Phone size={18} className="mt-0.5 text-terracotta" />
+            <Phone size={18} className="mt-0.5 text-burgundy" />
             <div>
               <p className="text-sm font-semibold text-ink">Call Us</p>
               <p className="text-sm text-ink-soft">+91 98765 43210</p>
@@ -53,21 +53,21 @@ export default function ContactUs() {
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <Mail size={18} className="mt-0.5 text-terracotta" />
+            <Mail size={18} className="mt-0.5 text-burgundy" />
             <div>
               <p className="text-sm font-semibold text-ink">Email Us</p>
               <p className="text-sm text-ink-soft">care@pipandpanda.in</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <MapPin size={18} className="mt-0.5 text-terracotta" />
+            <MapPin size={18} className="mt-0.5 text-burgundy" />
             <div>
               <p className="text-sm font-semibold text-ink">Studio Address</p>
               <p className="text-sm text-ink-soft">4th Floor, Fern Studio, Lower Parel, Mumbai, Maharashtra 400013</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <Clock size={18} className="mt-0.5 text-terracotta" />
+            <Clock size={18} className="mt-0.5 text-burgundy" />
             <div>
               <p className="text-sm font-semibold text-ink">Response Time</p>
               <p className="text-sm text-ink-soft">We usually reply within 24 hours on business days.</p>

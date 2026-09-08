@@ -20,7 +20,7 @@ export default function Header() {
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <IconButton icon={<Menu size={20} />} label="Open menu" onClick={() => setMenuOpen(true)} className="lg:hidden" />
           <Link to="/" className="flex items-center whitespace-nowrap">
-            <span className="font-serif text-base tracking-tight text-ink sm:text-2xl lg:text-3xl">Pip & Panda</span>
+            <img src="/brand/wordmark.png" alt="Pip & Panda" className="h-9 w-auto sm:h-11" />
           </Link>
         </div>
 
@@ -36,7 +36,7 @@ export default function Header() {
           <Link to="/wishlist" className="relative">
             <IconButton icon={<Heart size={19} />} label="Wishlist" />
             {productIds.length > 0 && (
-              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-terracotta text-[10px] font-semibold text-ivory">
+              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-burgundy text-[10px] font-semibold text-ivory">
                 {productIds.length}
               </span>
             )}
@@ -44,7 +44,7 @@ export default function Header() {
           <Link to="/bag" className="relative">
             <IconButton icon={<ShoppingBag size={19} />} label="Shopping Bag" />
             {totalCount > 0 && (
-              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-terracotta text-[10px] font-semibold text-ivory">
+              <span className="absolute right-0.5 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-burgundy text-[10px] font-semibold text-ivory">
                 {totalCount}
               </span>
             )}

@@ -10,7 +10,7 @@ export default function BrandStory() {
           <img src={brandStory.image} alt="Pip & Panda brand story" className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-col items-start gap-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">{brandStory.eyebrow}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-burgundy">{brandStory.eyebrow}</span>
           <h2 className="font-serif text-3xl text-ink sm:text-4xl">{brandStory.title}</h2>
           <p className="text-sm leading-relaxed text-ink-soft">{brandStory.body}</p>
           <div className="mt-2 grid w-full grid-cols-3 gap-4 border-y border-line py-5">

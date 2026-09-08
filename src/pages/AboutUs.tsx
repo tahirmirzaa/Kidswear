@@ -25,7 +25,7 @@ export default function AboutUs() {
 
       <div className="container-page grid grid-cols-1 items-center gap-10 pb-16 lg:grid-cols-2">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">{brandStory.eyebrow}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-burgundy">{brandStory.eyebrow}</span>
           <h2 className="mt-2 font-serif text-3xl text-ink">{brandStory.title}</h2>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">{brandStory.body}</p>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
@@ -53,7 +53,7 @@ export default function AboutUs() {
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {sustainabilityHighlights.map((item) => (
               <div key={item.id} className="flex flex-col items-center gap-3 rounded-2xl bg-white/70 p-6 text-center">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-terracotta">{icons[item.icon]}</div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-burgundy">{icons[item.icon]}</div>
                 <h3 className="text-sm font-semibold text-ink">{item.title}</h3>
                 <p className="text-xs leading-relaxed text-ink-soft">{item.description}</p>
               </div>

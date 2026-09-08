@@ -60,16 +60,16 @@ export default function OrderTracking() {
               return (
                 <div key={status} className="flex flex-1 flex-col items-center gap-2 text-center">
                   <div className="flex w-full items-center">
-                    <div className={cn("h-0.5 flex-1", isFirst ? "bg-transparent" : done ? "bg-terracotta" : "bg-line")} />
+                    <div className={cn("h-0.5 flex-1", isFirst ? "bg-transparent" : done ? "bg-burgundy" : "bg-line")} />
                     <div
                       className={cn(
                         "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs",
-                        done ? "bg-terracotta text-ivory" : "bg-ivory-dark text-ink-soft"
+                        done ? "bg-burgundy text-ivory" : "bg-ivory-dark text-ink-soft"
                       )}
                     >
                       {done ? <Check size={14} /> : i + 1}
                     </div>
-                    <div className={cn("h-0.5 flex-1", isLast ? "bg-transparent" : i < currentIndex ? "bg-terracotta" : "bg-line")} />
+                    <div className={cn("h-0.5 flex-1", isLast ? "bg-transparent" : i < currentIndex ? "bg-burgundy" : "bg-line")} />
                   </div>
                   <span className={cn("px-1 text-[11px] leading-tight", done ? "font-medium text-ink" : "text-ink-soft")}>{status}</span>
                 </div>
@@ -113,7 +113,7 @@ export default function OrderTracking() {
                   <p className="text-sm font-medium text-ink">{o.id}</p>
                   <p className="text-xs text-ink-soft">{new Date(o.date).toLocaleDateString("en-IN")} · {o.items.length} items</p>
                 </div>
-                <span className="text-xs font-semibold text-terracotta">{o.status}</span>
+                <span className="text-xs font-semibold text-burgundy">{o.status}</span>
               </button>
             ))}
           </div>

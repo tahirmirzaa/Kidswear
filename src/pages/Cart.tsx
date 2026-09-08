@@ -47,7 +47,7 @@ export default function Cart() {
                 <div className="flex flex-1 flex-col justify-between">
                   <div className="flex justify-between gap-3">
                     <div>
-                      <Link to={`/product/${line.product.slug}`} className="text-sm font-medium text-ink hover:text-terracotta">
+                      <Link to={`/product/${line.product.slug}`} className="text-sm font-medium text-ink hover:text-burgundy">
                         {line.product.name}
                       </Link>
                       <div className="mt-1 flex items-center gap-2 text-xs text-ink-soft">

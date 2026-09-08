@@ -30,7 +30,7 @@ export default function PincodeCheck() {
             setResult(null);
           }}
           placeholder="Enter pincode"
-          className="min-w-0 flex-1 rounded-lg border border-line px-3 py-2 text-sm focus:border-terracotta"
+          className="min-w-0 flex-1 rounded-lg border border-line px-3 py-2 text-sm focus:border-burgundy"
         />
         <Button variant="outline" size="sm" className="shrink-0" onClick={handleCheck}>
           Check

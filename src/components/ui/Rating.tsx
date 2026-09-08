@@ -19,7 +19,7 @@ export default function Rating({ value, count, size = 14, showValue = false, cla
             <Star
               key={i}
               size={size}
-              className={filled ? "fill-terracotta text-terracotta" : "fill-transparent text-ink-soft/40"}
+              className={filled ? "fill-burgundy text-burgundy" : "fill-transparent text-ink-soft/40"}
             />
           );
         })}

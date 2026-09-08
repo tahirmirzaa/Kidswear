@@ -57,7 +57,7 @@ export default function ProductGallery({ images, name, isWishlisted, onToggleWis
             aria-pressed={isWishlisted}
             className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-soft transition-transform hover:scale-105"
           >
-            <Heart size={18} className={isWishlisted ? "fill-terracotta text-terracotta" : "text-ink"} />
+            <Heart size={18} className={isWishlisted ? "fill-burgundy text-burgundy" : "text-ink"} />
           </button>
         )}
         <div className="absolute bottom-3 right-3 hidden items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-xs text-ink-soft sm:flex">

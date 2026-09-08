@@ -6,7 +6,7 @@ export default function Spinner({ className, size = 32 }: { className?: string; 
       role="status"
       aria-label="Loading"
       style={{ width: size, height: size }}
-      className={cn("animate-spin rounded-full border-2 border-ink-soft/20 border-t-terracotta", className)}
+      className={cn("animate-spin rounded-full border-2 border-ink-soft/20 border-t-burgundy", className)}
     />
   );
 }

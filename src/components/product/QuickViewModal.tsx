@@ -87,7 +87,7 @@ export default function QuickViewModal({ product, onClose }: { product: Product 
               aria-label="Toggle wishlist"
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line"
             >
-              <Heart size={18} className={isWishlisted(product.id) ? "fill-terracotta text-terracotta" : "text-ink"} />
+              <Heart size={18} className={isWishlisted(product.id) ? "fill-burgundy text-burgundy" : "text-ink"} />
             </button>
           </div>
           <Link to={`/product/${product.slug}`} onClick={onClose} className="text-center text-xs font-medium text-ink underline underline-offset-4">

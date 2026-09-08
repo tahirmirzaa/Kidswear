@@ -13,7 +13,7 @@ export default function HeroBanner() {
       <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-ink/10" />
       <div className="container-page relative w-full pb-10 pt-8 sm:pb-16">
         <div className="max-w-xl">
-          <span className="inline-block border-b border-terracotta/70 pb-1 text-xs font-semibold uppercase tracking-[0.3em] text-butter">
+          <span className="inline-block border-b border-burgundy/70 pb-1 text-xs font-semibold uppercase tracking-[0.3em] text-butter">
             Autumn–Winter Edit
           </span>
           <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-ivory sm:text-5xl lg:text-6xl xl:text-7xl">

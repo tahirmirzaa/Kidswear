@@ -29,7 +29,8 @@ export default function Login() {
   return (
     <div className="container-page flex justify-center py-16">
       <div className="w-full max-w-sm">
-        <h1 className="text-center font-serif text-3xl text-ink">Welcome Back</h1>
+        <img src="/brand/panda-in-p.png" alt="" className="mx-auto h-14 w-auto" />
+        <h1 className="mt-4 text-center font-serif text-3xl text-ink">Welcome Back</h1>
         <p className="mt-2 text-center text-sm text-ink-soft">Log in to track orders, manage your wishlist and more.</p>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
@@ -42,7 +43,7 @@ export default function Login() {
 
         <p className="mt-6 text-center text-sm text-ink-soft">
           New to Pip & Panda?{" "}
-          <Link to="/register" className="font-medium text-terracotta">
+          <Link to="/register" className="font-medium text-burgundy">
             Create an account
           </Link>
         </p>

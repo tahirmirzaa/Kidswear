@@ -74,7 +74,7 @@ export default function Account() {
           {!editing && (
             <button
               onClick={startEditing}
-              className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-terracotta hover:underline"
+              className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-burgundy hover:underline"
             >
               <Pencil size={13} /> Edit
             </button>
@@ -126,17 +126,17 @@ export default function Account() {
 
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
         <Link to="/orders/track" className="flex flex-col gap-2 rounded-2xl border border-line p-6 hover:border-ink">
-          <Package size={20} className="text-terracotta" />
+          <Package size={20} className="text-burgundy" />
           <p className="font-semibold text-ink">Orders</p>
           <p className="text-sm text-ink-soft">{orders.length} orders placed</p>
         </Link>
         <Link to="/wishlist" className="flex flex-col gap-2 rounded-2xl border border-line p-6 hover:border-ink">
-          <Heart size={20} className="text-terracotta" />
+          <Heart size={20} className="text-burgundy" />
           <p className="font-semibold text-ink">Wishlist</p>
           <p className="text-sm text-ink-soft">{products.length} items saved</p>
         </Link>
         <Link to="/addresses" className="flex flex-col gap-2 rounded-2xl border border-line p-6 hover:border-ink">
-          <MapPin size={20} className="text-terracotta" />
+          <MapPin size={20} className="text-burgundy" />
           <p className="font-semibold text-ink">Addresses</p>
           <p className="text-sm text-ink-soft">{addresses.length} saved addresses</p>
         </Link>

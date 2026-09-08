@@ -4,9 +4,9 @@
   --font-serif: "Fraunces", "Georgia", serif;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
-  --color-ivory: #f8f4ec;
+  --color-ivory: #f8f5eb;
   --color-ivory-dark: #efe6d3;
-  --color-ink: #1e1a15;
+  --color-ink: #292724;
   --color-ink-soft: #56503f;
 
   --color-blush: #efd6d1;
@@ -18,9 +18,9 @@
   --color-butter: #f1e2bf;
   --color-butter-dark: #e2cb8e;
 
-  --color-terracotta: #a3813e;
-  --color-terracotta-dark: #866a32;
-  --color-sale: #7a2436;
+  --color-burgundy: #782638;
+  --color-burgundy-dark: #5e1e2c;
+  --color-sale: #b3312c;
 
   --color-line: #e3dac5;
 
@@ -46,12 +46,12 @@
   }
 
   ::selection {
-    background-color: var(--color-terracotta);
+    background-color: var(--color-burgundy);
     color: var(--color-ivory);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-terracotta);
+    outline: 2px solid var(--color-burgundy);
     outline-offset: 2px;
   }
 }

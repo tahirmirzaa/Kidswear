@@ -52,7 +52,7 @@ export default function ShippingReturns() {
         {sections.map((s) => (
           <div key={s.title} className="rounded-2xl border border-line p-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage/40 text-terracotta">{s.icon}</div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sage/40 text-burgundy">{s.icon}</div>
               <h2 className="font-serif text-xl text-ink">{s.title}</h2>
             </div>
             <ul className="mt-4 list-inside list-disc space-y-2 text-sm leading-relaxed text-ink-soft">

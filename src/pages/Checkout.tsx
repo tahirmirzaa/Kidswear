@@ -93,7 +93,7 @@ export default function Checkout() {
                     payment === opt.id ? "border-ink bg-ivory-dark/50" : "border-line"
                   }`}
                 >
-                  <input type="radio" name="payment" checked={payment === opt.id} onChange={() => setPayment(opt.id)} className="accent-terracotta" />
+                  <input type="radio" name="payment" checked={payment === opt.id} onChange={() => setPayment(opt.id)} className="accent-burgundy" />
                   {opt.icon}
                   {opt.label}
                 </label>

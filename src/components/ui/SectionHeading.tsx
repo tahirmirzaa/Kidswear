@@ -23,7 +23,7 @@ export default function SectionHeading({
   return (
     <div className={`mb-8 flex flex-col gap-3 sm:mb-10 ${align === "center" ? "items-center text-center" : "items-start"}`}>
       {eyebrow && (
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">{eyebrow}</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-burgundy">{eyebrow}</span>
       )}
       <div className="flex w-full flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
         <div className={align === "center" ? "mx-auto max-w-xl text-center" : ""}>
@@ -31,7 +31,7 @@ export default function SectionHeading({
           {description && <p className="mt-2 max-w-md text-sm text-ink-soft">{description}</p>}
         </div>
         {ctaLabel && ctaTo && (
-          <Link to={ctaTo} className="shrink-0 text-sm font-semibold text-ink underline underline-offset-4 hover:text-terracotta">
+          <Link to={ctaTo} className="shrink-0 text-sm font-semibold text-ink underline underline-offset-4 hover:text-burgundy">
             {ctaLabel}
           </Link>
         )}
