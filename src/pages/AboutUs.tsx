@@ -1,5 +1,5 @@
 import Breadcrumb from "../components/ui/Breadcrumb";
-import { brandStory, sustainabilityHighlights } from "../data/content";
+import { brandStory, productProof } from "../data/content";
 import { realPhoto } from "../lib/images";
 import { Leaf, ShieldCheck, Wind, Recycle } from "lucide-react";
 
@@ -29,18 +29,9 @@ export default function AboutUs() {
           <h2 className="mt-2 font-serif text-3xl text-ink">{brandStory.title}</h2>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">{brandStory.body}</p>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            Every collection is designed by our in-house studio in Mumbai and tested with real families before it
-            reaches our shelves. We believe children shouldn't have to choose between clothes that look good and
-            clothes that feel good, so we build both into every stitch.
+            We believe children shouldn't have to choose between clothes that look good and clothes that feel good,
+            so we build both into every stitch of our launch range: cotton Everyday Sets and Nightwear for ages 2-6.
           </p>
-          <div className="mt-6 grid grid-cols-3 gap-4 border-y border-line py-5">
-            {brandStory.stats.map((s) => (
-              <div key={s.label}>
-                <p className="font-serif text-2xl text-ink sm:text-3xl">{s.value}</p>
-                <p className="text-xs text-ink-soft">{s.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
         <div className="aspect-[4/5] overflow-hidden rounded-2xl">
           <img src={realPhoto("1490481651871-ab68de25d43d")} alt="Design studio" className="h-full w-full object-cover" />
@@ -51,7 +42,7 @@ export default function AboutUs() {
         <div className="container-page">
           <h2 className="text-center font-serif text-3xl text-ink">Why Parents Trust Us</h2>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {sustainabilityHighlights.map((item) => (
+            {productProof.map((item) => (
               <div key={item.id} className="flex flex-col items-center gap-3 rounded-2xl bg-white/70 p-6 text-center">
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-burgundy">{icons[item.icon]}</div>
                 <h3 className="text-sm font-semibold text-ink">{item.title}</h3>

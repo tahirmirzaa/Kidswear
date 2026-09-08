@@ -1,23 +1,21 @@
 import HeroBanner from "../components/sections/HeroBanner";
-import ShopByAge from "../components/sections/ShopByAge";
-import ShopByCategory from "../components/sections/ShopByCategory";
-import PromoBanners from "../components/sections/PromoBanners";
+import FeaturedProducts from "../components/sections/FeaturedProducts";
+import CollectionTiles from "../components/sections/CollectionTiles";
+import ProductProof from "../components/sections/ProductProof";
+import ShopBySize from "../components/sections/ShopBySize";
 import BrandStory from "../components/sections/BrandStory";
-import SustainabilityHighlights from "../components/sections/SustainabilityHighlights";
-import ShopByOccasion from "../components/sections/ShopByOccasion";
-import Testimonials from "../components/sections/Testimonials";
+import LaunchSignup from "../components/sections/LaunchSignup";
 
 export default function Home() {
   return (
     <>
       <HeroBanner />
-      <ShopByAge />
-      <ShopByCategory />
-      <PromoBanners />
+      <FeaturedProducts />
+      <CollectionTiles />
+      <ProductProof />
+      <ShopBySize />
       <BrandStory />
-      <SustainabilityHighlights />
-      <ShopByOccasion />
-      <Testimonials />
+      <LaunchSignup />
     </>
   );
 }

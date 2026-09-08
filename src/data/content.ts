@@ -1,55 +1,31 @@
 import { realPhoto } from "../lib/images";
 
-export const promoBanners = [
+// Truthful, fabric-level construction details pulled from the launch products
+// themselves, replacing the earlier certification/health claims that had no
+// supporting documentation.
+export const productProof = [
   {
-    id: "promo-1",
-    title: "The Festive Edit",
-    subtitle: "Hand-embroidered occasion wear for celebrations big and small",
-    cta: "Explore Festive",
-    to: "/occasion/festive",
-    image: realPhoto("1597294151491-1d22b38698d6"),
-  },
-  {
-    id: "promo-2",
-    title: "Little Layers, Big Comfort",
-    subtitle: "Cosy fleece and corduroy edits for the season ahead",
-    cta: "Shop the Edit",
-    to: "/category/boys",
-    image: realPhoto("1758782213532-bbb5fd89885e"),
-  },
-  {
-    id: "promo-3",
-    title: "Gift-Worthy Baby Sets",
-    subtitle: "Thoughtfully packaged essentials for new parents",
-    cta: "Shop Gifting",
-    to: "/occasion/gifting",
-    image: realPhoto("1637591524228-c97670278b50"),
-  },
-];
-
-export const sustainabilityHighlights = [
-  {
-    id: "sus-1",
-    title: "GOTS-Certified Cotton",
-    description: "Grown without harmful pesticides, gentle on skin and on the planet.",
+    id: "proof-1",
+    title: "Breathable Cotton and Cotton Blends",
+    description: "Every Everyday Set and Nightwear piece is cut from organic cotton or a cotton blend, chosen for everyday comfort.",
     icon: "leaf",
   },
   {
-    id: "sus-2",
-    title: "Child-Safe Construction",
-    description: "Flat-lock seams, tag-free necklines and non-toxic dyes, tested for sensitive skin.",
+    id: "proof-2",
+    title: "Flat-Lock Seams and Elasticated Waists",
+    description: "Seams and waistbands are finished for comfortable, all-day movement, from climbing to naptime.",
     icon: "shield-check",
   },
   {
-    id: "sus-3",
-    title: "Breathable, Season-Ready Fabric",
-    description: "Fabrics chosen to keep little ones comfortable through India's varied climates.",
+    id: "proof-3",
+    title: "Built for India's Climate",
+    description: "Lightweight, breathable fabrics chosen to keep little ones comfortable through warm and humid days.",
     icon: "wind",
   },
   {
-    id: "sus-4",
-    title: "Responsible Packaging",
-    description: "Recyclable, plastic-light packaging for every order that reaches your door.",
+    id: "proof-4",
+    title: "Machine Washable, Made to Last",
+    description: "Colourfast dyes and reinforced stitching so pieces hold up wash after wash.",
     icon: "recycle",
   },
 ];
@@ -58,45 +34,9 @@ export const brandStory = {
   eyebrow: "Our Story",
   title: "Made for Little Adventures",
   body:
-    "Pip & Panda began with a simple idea: dressing children shouldn't mean choosing between comfort and craftsmanship. Every piece is designed in-studio and tested for the way real children move: climbing, twirling, napping, and everything in between, using fabrics soft enough for sensitive skin and sturdy enough for daily play.",
+    "Pip & Panda began with a simple idea: dressing children shouldn't mean choosing between comfort and craftsmanship. Every piece is designed with everyday movement in mind: climbing, twirling, napping, and everything in between, using fabrics soft enough for sensitive skin and sturdy enough for daily play.",
   image: realPhoto("1776660913956-213dc8e7e1af"),
-  stats: [
-    { label: "Fabrics Lab-Tested", value: "100%" },
-    { label: "Happy Families", value: "40,000+" },
-    { label: "Cities Delivered To", value: "500+" },
-  ],
 };
-
-export const testimonials = [
-  {
-    id: "t-1",
-    author: "Ishita Malhotra",
-    location: "Mumbai",
-    rating: 5,
-    body: "The quality genuinely rivals imported brands we used to order. My daughter's eczema hasn't flared up once since we switched.",
-  },
-  {
-    id: "t-2",
-    author: "Rohan Kapoor",
-    location: "Bengaluru",
-    rating: 5,
-    body: "Fast delivery, beautiful packaging, and the sizing chart was spot on. Ordering festive wear online finally feels safe.",
-  },
-  {
-    id: "t-3",
-    author: "Simran Kaur",
-    location: "Delhi",
-    rating: 4,
-    body: "Love that they have options right from newborn to my 12-year-old. One website for both my kids now.",
-  },
-  {
-    id: "t-4",
-    author: "Aditya Rao",
-    location: "Hyderabad",
-    rating: 5,
-    body: "The return process was painless when a size didn't work. Genuinely parent-friendly experience from browsing to delivery.",
-  },
-];
 
 export const faqs = [
   {

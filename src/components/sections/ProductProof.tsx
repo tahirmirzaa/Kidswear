@@ -1,5 +1,5 @@
 import { Leaf, ShieldCheck, Wind, Recycle } from "lucide-react";
-import { sustainabilityHighlights } from "../../data/content";
+import { productProof } from "../../data/content";
 import SectionHeading from "../ui/SectionHeading";
 import HorizontalScroller from "../ui/HorizontalScroller";
 
@@ -10,18 +10,18 @@ const icons: Record<string, React.ReactNode> = {
   recycle: <Recycle size={22} />,
 };
 
-export default function SustainabilityHighlights() {
+export default function ProductProof() {
   return (
     <section className="bg-sage/40 py-14 sm:py-20">
       <div className="container-page">
         <SectionHeading
           align="center"
-          eyebrow="Our Promise"
-          title="Gentle on Skin, Kind to the Planet"
-          description="Every fabric choice starts with one question: is it safe enough for a child?"
+          eyebrow="Fabric and Fit"
+          title="What's Actually in Every Piece"
+          description="Real construction details from our launch range, not marketing claims."
         />
         <HorizontalScroller>
-          {sustainabilityHighlights.map((item) => (
+          {productProof.map((item) => (
             <div
               key={item.id}
               className="flex w-[70%] flex-none flex-col items-center gap-3 rounded-2xl bg-white/70 p-6 text-center sm:w-[42%] lg:w-1/4"
