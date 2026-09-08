@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/ui/Input";
+import PasswordInput from "../components/ui/PasswordInput";
 import Button from "../components/ui/Button";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
@@ -21,7 +22,10 @@ export default function Login() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
 
-    login(email);
+    if (!login(email, password)) {
+      setErrors({ password: "Incorrect email or password" });
+      return;
+    }
     showToast("Welcome back!");
     navigate("/account");
   };
@@ -35,7 +39,12 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <Input label="Email Address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} error={errors.email} placeholder="you@example.com" />
-          <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} placeholder="••••••••" />
+          <div className="flex flex-col gap-1.5">
+            <PasswordInput label="Password" value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} placeholder="••••••••" />
+            <Link to="/forgot-password" className="self-end text-xs font-medium text-burgundy">
+              Forgot password?
+            </Link>
+          </div>
           <Button type="submit" variant="primary" size="lg" fullWidth className="mt-2">
             Log In
           </Button>

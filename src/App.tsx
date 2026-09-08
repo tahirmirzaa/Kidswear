@@ -16,12 +16,14 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderTracking from "./pages/OrderTracking";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 import Account from "./pages/Account";
 import Addresses from "./pages/Addresses";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import FAQs from "./pages/FAQs";
 import ShippingReturns from "./pages/ShippingReturns";
+import SizeGuide from "./pages/SizeGuide";
 import { PrivacyPolicy, Terms } from "./pages/StaticPolicy";
 import NotFound from "./pages/NotFound";
 
@@ -46,12 +48,14 @@ export default function App() {
         <Route path="/orders/track" element={<OrderTracking />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/account" element={<Account />} />
         <Route path="/addresses" element={<Addresses />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/shipping-returns" element={<ShippingReturns />} />
+        <Route path="/size-guide" element={<SizeGuide />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<NotFound />} />

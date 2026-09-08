@@ -72,7 +72,7 @@ const templates: Template[] = [
     price: 1299, discount: 999,
     description: "A gentle everyday romper cut from breathable organic cotton, designed with flat-lock seams so there's nothing to irritate delicate newborn skin.",
     fit: "Relaxed fit with room to move; true to size.",
-    benefits: ["GOTS-certified organic cotton", "Flat-lock seams, tag-free", "Easy snap closures for quick changes"],
+    benefits: ["Organic cotton", "Flat-lock seams, tag-free", "Easy snap closures for quick changes"],
     care: ["Machine wash cold with like colours", "Do not bleach", "Tumble dry low", "Warm iron if needed"],
     seedTag: "romper", isNew: true, isBestseller: true,
   },

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/ui/Input";
+import PasswordInput from "../components/ui/PasswordInput";
 import Button from "../components/ui/Button";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
@@ -23,7 +24,7 @@ export default function Register() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) return;
 
-    register(name, email);
+    register(name, email, password);
     showToast(`Welcome to Pip & Panda, ${name.split(" ")[0]}!`);
     navigate("/account");
   };
@@ -33,12 +34,12 @@ export default function Register() {
       <div className="w-full max-w-sm">
         <img src="/brand/panda-in-p.png" alt="" className="mx-auto h-14 w-auto" />
         <h1 className="mt-4 text-center font-serif text-3xl text-ink">Create Your Account</h1>
-        <p className="mt-2 text-center text-sm text-ink-soft">Join for early access to new arrivals and 10% off your first order.</p>
+        <p className="mt-2 text-center text-sm text-ink-soft">Join for early access when we launch.</p>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <Input label="Full Name" value={name} onChange={(e) => setName(e.target.value)} error={errors.name} placeholder="Priya Sharma" />
           <Input label="Email Address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} error={errors.email} placeholder="you@example.com" />
-          <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} placeholder="••••••••" />
+          <PasswordInput label="Password" value={password} onChange={(e) => setPassword(e.target.value)} error={errors.password} placeholder="••••••••" />
           <Button type="submit" variant="primary" size="lg" fullWidth className="mt-2">
             Create Account
           </Button>

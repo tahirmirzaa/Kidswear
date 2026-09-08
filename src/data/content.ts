@@ -51,8 +51,8 @@ export const faqs = [
     category: "Shipping & Delivery",
     items: [
       { q: "How long does delivery take?", a: "Most orders arrive within 3–6 business days depending on your pincode. Metro cities typically see 2–4 day delivery." },
-      { q: "Do you deliver across India?", a: "Yes, we deliver to over 500 cities and towns across India. Enter your pincode on any product page to check serviceability." },
-      { q: "Is shipping free?", a: "Shipping is free on all prepaid orders above ₹1,499. A nominal fee applies below this threshold." },
+      { q: "Do you deliver across India?", a: "Yes, we deliver across India. Enter your pincode on any product page to check serviceability." },
+      { q: "Is shipping free?", a: "Shipping is free on prepaid orders of ₹1,499 or more. A nominal fee applies below this threshold." },
     ],
   },
   {
@@ -67,7 +67,7 @@ export const faqs = [
     category: "Sizing & Products",
     items: [
       { q: "How do I choose the right size?", a: "Each product page includes a detailed Size Guide with age and body measurement charts. When in doubt, we recommend sizing up for growing children." },
-      { q: "Are your fabrics safe for sensitive skin?", a: "Yes, all our fabrics are lab-tested for harmful substances and finished without harsh chemical treatments." },
+      { q: "Are your fabrics safe for sensitive skin?", a: "Our Everyday Sets and Nightwear are cut from organic cotton or cotton blends, finished with flat-lock seams and tag-free necklines for everyday comfort." },
     ],
   },
 ];

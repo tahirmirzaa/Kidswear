@@ -10,7 +10,7 @@ const columns = [
       { label: "Contact Us", to: "/contact" },
       { label: "FAQs", to: "/faqs" },
       { label: "Track Your Order", to: "/orders/track" },
-      { label: "Size Guide", to: "/faqs" },
+      { label: "Size Guide", to: "/size-guide" },
     ],
   },
   {
@@ -26,9 +26,8 @@ const columns = [
     title: "Company",
     links: [
       { label: "About Us", to: "/about" },
-      { label: "Gifting", to: "/occasion/gifting" },
       { label: "Sale", to: "/sale" },
-      { label: "New Arrivals", to: "/new-arrivals" },
+      { label: "Shop All", to: "/new-arrivals" },
     ],
   },
 ];

@@ -6,9 +6,8 @@ const sections = [
     icon: <Truck size={20} />,
     title: "Shipping Policy",
     points: [
-      "We deliver to over 500 cities and towns across India.",
       "Standard delivery takes 3–6 business days; metro cities typically see 2–4 days.",
-      "Free shipping on all prepaid orders above ₹1,499. A flat ₹79 fee applies below this amount.",
+      "Free shipping on prepaid orders of ₹1,499 or more. A flat ₹79 fee applies below this amount.",
       "You'll receive tracking details via SMS and email once your order ships.",
     ],
   },
@@ -19,7 +18,7 @@ const sections = [
       "Easy 15-day return and exchange window from the date of delivery.",
       "Items must be unworn, unwashed, and returned with original tags attached.",
       "Free pickup is arranged from your delivery address for eligible returns.",
-      "Occasion wear and accessories marked 'Final Sale' are not eligible for return.",
+      "Items marked 'Final Sale' are not eligible for return.",
     ],
   },
   {
