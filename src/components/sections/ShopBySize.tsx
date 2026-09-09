@@ -6,10 +6,10 @@ export default function ShopBySize() {
   return (
     <section className="container-page py-14 sm:py-20">
       <SectionHeading eyebrow="Growing Up" title="Shop by Size" description="Our launch range covers ages 2-6. Find their perfect fit." />
-      <div className="grid grid-cols-4 gap-3 sm:gap-5">
+      <div className="grid grid-cols-4 gap-4 sm:gap-6">
         {launchSizes.map((size) => (
-          <Link key={size.slug} to={`/shop-by-age/${size.slug}`} className="group flex flex-col items-center gap-2 text-center">
-            <div className="aspect-square w-full max-w-[88px] overflow-hidden rounded-full bg-ivory-dark sm:max-w-[120px]">
+          <Link key={size.slug} to={`/shop-by-age/${size.slug}`} className="group flex flex-col items-center gap-3 text-center">
+            <div className="aspect-square w-full max-w-[120px] overflow-hidden rounded-full bg-ivory-dark sm:max-w-[160px]">
               <img
                 src={size.image}
                 alt={size.label}
@@ -17,7 +17,7 @@ export default function ShopBySize() {
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-            <p className="font-serif text-sm text-ink transition-colors group-hover:text-burgundy sm:text-base">{size.label}</p>
+            <p className="font-serif text-base text-ink transition-colors group-hover:text-burgundy sm:text-lg">{size.label}</p>
           </Link>
         ))}
       </div>
