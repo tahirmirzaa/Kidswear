@@ -33,7 +33,7 @@ export default function NotifyMe({ product, size, color, disabled }: { product: 
 
   if (disabled) {
     return (
-      <div className="flex items-center justify-center rounded-xl border border-line bg-ivory-dark py-3.5 text-sm font-medium text-ink-soft">
+      <div className="flex items-center justify-center rounded-xl border border-line bg-ivory-dark py-2.5 text-sm font-medium text-ink-soft">
         Currently Out of Stock
       </div>
     );
@@ -41,7 +41,7 @@ export default function NotifyMe({ product, size, color, disabled }: { product: 
 
   if (alreadyNotified && size) {
     return (
-      <div className="flex items-center justify-center gap-2 rounded-xl border border-line bg-sage/30 py-3.5 text-sm font-medium text-ink">
+      <div className="flex items-center justify-center gap-2 rounded-xl border border-line bg-sage/30 py-2.5 text-sm font-medium text-ink">
         <CheckCircle2 size={16} className="text-burgundy" /> We'll email you when this is ready to order
       </div>
     );
@@ -78,7 +78,7 @@ export default function NotifyMe({ product, size, color, disabled }: { product: 
           placeholder="you@example.com"
           wrapperClassName="flex-1"
         />
-        <Button type="submit" variant="primary" size="lg" className="shrink-0">
+        <Button type="submit" variant="primary" size="md" className="shrink-0">
           Notify Me at Launch
         </Button>
       </div>

@@ -5,7 +5,6 @@ import { useCart } from "../context/CartContext";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
-import ColorSwatch from "../components/ui/ColorSwatch";
 import EmptyState from "../components/ui/EmptyState";
 import { formatINR } from "../lib/utils";
 import type { Address } from "../types";
@@ -109,29 +108,22 @@ export default function Checkout() {
         <div className="h-fit rounded-2xl border border-line p-6">
           <h2 className="font-serif text-xl text-ink">Order Summary</h2>
           <div className="mt-4 flex flex-col divide-y divide-line">
-            {lines.map((l) => {
-              const colorObj = l.product.colors.find((c) => c.name === l.color) ?? l.product.colors[0];
-              return (
-                <div key={`${l.productId}-${l.size}-${l.color}`} className="flex gap-3 pt-3 first:pt-0 text-sm">
-                  <div className="h-16 w-14 shrink-0 overflow-hidden rounded-lg bg-ivory-dark">
-                    <img src={l.product.images[0]} alt={l.product.name} className="h-full w-full object-cover" />
-                  </div>
-                  <div className="flex flex-1 items-start justify-between gap-3">
-                    <div>
-                      <p className="text-ink-soft">{l.product.name}</p>
-                      <p className="mt-0.5 flex items-center gap-2 text-xs text-ink-soft">
-                        <span>Size: {l.size}</span>
-                        <span className="flex items-center gap-1">
-                          Colour: {colorObj && <ColorSwatch color={colorObj} size="sm" />} {l.color}
-                        </span>
-                        <span>× {l.quantity}</span>
-                      </p>
-                    </div>
-                    <span className="shrink-0 font-medium text-ink">{formatINR((l.product.discountPrice ?? l.product.price) * l.quantity)}</span>
-                  </div>
+            {lines.map((l) => (
+              <div key={`${l.productId}-${l.size}-${l.color}`} className="flex gap-3 py-3 first:pt-0 last:pb-0 text-sm">
+                <div className="h-14 w-12 shrink-0 overflow-hidden rounded-lg bg-ivory-dark">
+                  <img src={l.product.images[0]} alt={l.product.name} className="h-full w-full object-cover" />
                 </div>
-              );
-            })}
+                <div className="flex flex-1 items-start justify-between gap-3">
+                  <div>
+                    <p className="text-ink-soft">{l.product.name}</p>
+                    <p className="mt-0.5 text-xs text-ink-soft">
+                      {l.size} · {l.color} · Qty {l.quantity}
+                    </p>
+                  </div>
+                  <span className="shrink-0 font-medium text-ink">{formatINR((l.product.discountPrice ?? l.product.price) * l.quantity)}</span>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="mt-4 flex flex-col gap-2 border-t border-line pt-4 text-sm">
             <div className="flex justify-between text-ink-soft">
@@ -148,7 +140,7 @@ export default function Checkout() {
             </div>
           </div>
           <Button variant="primary" fullWidth size="lg" className="mt-5" disabled title="We are not accepting orders at the moment">
-            Not Accepting Orders Currently
+            Coming Soon
           </Button>
           <p className="mt-3 text-center text-xs text-ink-soft">
             We're launching soon. Orders can't be placed just yet, please check back later.
