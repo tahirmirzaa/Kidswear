@@ -57,6 +57,11 @@ interface Template {
 const EVERYDAY_SEED_TAGS = new Set(["tiered-frock", "coord-girls", "corduroy-pinafore", "shirt-shorts", "polo-chino", "overshirt"]);
 const NIGHTWEAR_SEED_TAGS = new Set(["pajama-print", "nightdress"]);
 
+// The four sellable launch sizes (ages 2-6). Launch-visible products must only
+// expose sizes from this set everywhere (filters, PDP, Quick View, cards) even
+// though their source templates carry a wider historical size run.
+const LAUNCH_SIZES = ["2-3Y", "3-4Y", "4-5Y", "5-6Y"];
+
 const BABY_SIZES = ["0-3M", "3-6M", "6-9M", "9-12M", "12-18M"];
 const TODDLER_SIZES = ["1-2Y", "2-3Y", "3-4Y"];
 const KIDS_SIZES = ["4-5Y", "5-6Y", "6-7Y", "7-8Y"];
@@ -452,6 +457,22 @@ function buildProducts(): Product[] {
   let seed = 0;
 
   templates.forEach((t) => {
+    const seedStart = seed;
+    const isLaunch = EVERYDAY_SEED_TAGS.has(t.seedTag) || NIGHTWEAR_SEED_TAGS.has(t.seedTag);
+    // Only build cross-navigable colour swatches when every colourway of this
+    // design is a single colour (i.e. each is genuinely a sibling SKU of the
+    // same garment). Multi-key colourways (e.g. a main + trim combo) are one
+    // SKU's own two-tone palette, not alternate products, so leave those as
+    // plain decorative swatches with no slug to navigate to.
+    const singleColorDesign = t.colorways.every((c) => c.length === 1);
+    const siblingColorOptions: ColorOption[] = singleColorDesign
+      ? t.colorways.map((keys, idx) => {
+          const label = keys.map((k) => PALETTE[k].name.split(" ")[0]).join(" & ");
+          const siblingSlug = slugify(`${t.seedTag}-${label}-${seedStart + idx + 1}`);
+          return { ...PALETTE[keys[0]], slug: siblingSlug };
+        })
+      : [];
+
     t.colorways.forEach((colorKeys, variantIdx) => {
       seed += 1;
       const colorLabel = colorKeys.map((k) => PALETTE[k].name.split(" ")[0]).join(" & ");
@@ -460,6 +481,7 @@ function buildProducts(): Product[] {
       const id = `p-${seed.toString().padStart(3, "0")}`;
       const reviewCount = t.isBestseller ? 18 + (seed % 24) : 3 + (seed % 12);
       const rating = Number((3.9 + ((seed * 7) % 11) / 10).toFixed(1));
+      const sizes = isLaunch ? t.sizes.filter((s) => LAUNCH_SIZES.includes(s)) : t.sizes;
 
       products.push({
         id,
@@ -470,8 +492,8 @@ function buildProducts(): Product[] {
         ageGroups: t.ageGroups,
         occasions: t.occasions,
         fabric: t.fabric,
-        sizes: t.sizes,
-        colors: buildColorOptions(colorKeys.length > 1 ? colorKeys : [colorKeys[0], ...(t.colorways[(variantIdx + 1) % t.colorways.length] || [])].filter((v, i, a) => a.indexOf(v) === i)),
+        sizes,
+        colors: singleColorDesign ? siblingColorOptions : buildColorOptions(colorKeys),
         price: t.price,
         discountPrice: t.discount,
         images: [
@@ -491,7 +513,7 @@ function buildProducts(): Product[] {
         reviewCount,
         reviews: buildReviews(seed, Math.min(5, Math.max(2, reviewCount % 5 + 2)), id, t.ageGroups),
         tags: [t.category, t.gender, t.fabric],
-        launchVisible: EVERYDAY_SEED_TAGS.has(t.seedTag) || NIGHTWEAR_SEED_TAGS.has(t.seedTag),
+        launchVisible: isLaunch,
         launchCollection: EVERYDAY_SEED_TAGS.has(t.seedTag) ? "everyday-sets" : NIGHTWEAR_SEED_TAGS.has(t.seedTag) ? "nightwear" : undefined,
       });
     });
@@ -511,16 +533,14 @@ export function getProductById(id: string): Product | undefined {
   return products.find((p) => p.id === id);
 }
 
+// "Complete the Look" was removed: the 2-collection launch catalogue (Everyday
+// Sets, Nightwear) has no genuine complements, only substitute outfits, so a
+// single "You May Also Like" set (same collection first) covers it honestly.
 export function getRelatedProducts(product: Product, count = 4): Product[] {
-  return launchProducts
-    .filter((p) => p.id !== product.id && p.category === product.category)
-    .slice(0, count);
-}
-
-export function getCompleteTheLook(product: Product, count = 4): Product[] {
-  return launchProducts
-    .filter((p) => p.id !== product.id && p.category !== product.category && p.gender === product.gender)
-    .slice(0, count);
+  const pool = launchProducts.filter((p) => p.id !== product.id);
+  const sameCollection = pool.filter((p) => p.launchCollection === product.launchCollection);
+  const rest = pool.filter((p) => p.launchCollection !== product.launchCollection);
+  return [...sameCollection, ...rest].slice(0, count);
 }
 
 export const newArrivals = launchProducts;
@@ -531,15 +551,17 @@ function uniqueSorted<T>(values: T[]): T[] {
 }
 
 // Filter sidebar options should only ever offer values that actually exist among the
-// launch products, so a hidden category/age/occasion/fabric can't leak back in as a
-// selectable (and always-empty) filter.
-const SIZE_ORDER = [...BABY_SIZES, ...TODDLER_SIZES, ...KIDS_SIZES, ...TWEEN_SIZES, "One Size"];
+// launch products, so a hidden category/size can't leak back in as a selectable (and
+// always-empty) filter. Age, fabric and occasion facets were removed entirely (CAT-01):
+// "Age" duplicated the Size filter once sizes were trimmed to the four launch sizes,
+// and the 2-collection launch assortment doesn't have enough fabric/occasion variety
+// to make those facets useful yet.
 const availableSizes = new Set(launchProducts.flatMap((p) => p.sizes));
+const launchPrices = launchProducts.map((p) => p.discountPrice ?? p.price);
 
 export const launchFilterOptions = {
-  ageGroups: uniqueSorted(launchProducts.flatMap((p) => p.ageGroups)),
-  categories: uniqueSorted(launchProducts.map((p) => p.category)),
-  fabrics: uniqueSorted(launchProducts.map((p) => p.fabric)),
-  occasions: uniqueSorted(launchProducts.flatMap((p) => p.occasions)),
-  sizes: SIZE_ORDER.filter((s) => availableSizes.has(s)),
+  collections: uniqueSorted(launchProducts.map((p) => p.launchCollection).filter((c): c is NonNullable<Product["launchCollection"]> => Boolean(c))),
+  sizes: LAUNCH_SIZES.filter((s) => availableSizes.has(s)),
+  minPrice: Math.min(...launchPrices),
+  maxPrice: Math.max(...launchPrices),
 };

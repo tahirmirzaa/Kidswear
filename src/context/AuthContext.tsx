@@ -17,7 +17,6 @@ interface AuthContextValue {
   register: (name: string, email: string, password: string) => void;
   logout: () => void;
   updateProfile: (fields: Partial<User>) => void;
-  resetPassword: (email: string, newPassword: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -51,14 +50,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAccount((prev) => (prev ? { ...prev, ...fields } : prev));
   };
 
-  const resetPassword = (email: string, newPassword: string) => {
-    if (!account || account.email.toLowerCase() !== email.toLowerCase()) return false;
-    setAccount({ ...account, password: newPassword });
-    return true;
-  };
-
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, updateProfile, resetPassword }}>
+    <AuthContext.Provider value={{ user, login, register, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

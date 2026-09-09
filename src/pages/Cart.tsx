@@ -7,8 +7,10 @@ import QuantitySelector from "../components/ui/QuantitySelector";
 import ColorSwatch from "../components/ui/ColorSwatch";
 import Button from "../components/ui/Button";
 import { formatINR } from "../lib/utils";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function Cart() {
+  useDocumentMeta({ title: "Shopping Bag | Pip & Panda", noindex: true });
   const { lines, removeItem, updateQuantity, subtotal } = useCart();
 
   if (lines.length === 0) {

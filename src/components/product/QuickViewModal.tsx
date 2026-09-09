@@ -3,39 +3,33 @@ import { Link, useNavigate } from "react-router-dom";
 import type { Product } from "../../types";
 import Modal from "../ui/Modal";
 import PriceTag from "../ui/PriceTag";
-import Rating from "../ui/Rating";
 import ColorSwatch from "../ui/ColorSwatch";
-import Button from "../ui/Button";
-import { useCart } from "../../context/CartContext";
+import NotifyMe from "./NotifyMe";
 import { useWishlist } from "../../context/WishlistContext";
 import { Heart } from "lucide-react";
 
 export default function QuickViewModal({ product, onClose }: { product: Product | null; onClose: () => void }) {
   const [size, setSize] = useState<string | null>(null);
-  const [color, setColor] = useState<string | null>(null);
-  const [addedToBag, setAddedToBag] = useState(false);
-  const navigate = useNavigate();
-  const { addItem } = useCart();
+  const [color, setColor] = useState<string>("");
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const navigate = useNavigate();
+
+  const selectColor = (c: Product["colors"][number]) => {
+    if (product && c.slug && c.slug !== product.slug) {
+      onClose();
+      navigate(`/product/${c.slug}`);
+      return;
+    }
+    setColor(c.name);
+  };
 
   useEffect(() => {
     setSize(null);
-    setColor(null);
-    setAddedToBag(false);
+    const ownColor = product?.colors.find((c) => c.slug === product.slug) ?? product?.colors[0];
+    setColor(ownColor?.name ?? "");
   }, [product]);
 
   if (!product) return null;
-
-  const handleAdd = () => {
-    if (addedToBag) {
-      onClose();
-      navigate("/bag");
-      return;
-    }
-    if (!size || !color) return;
-    addItem(product, size, color, 1);
-    setAddedToBag(true);
-  };
 
   return (
     <Modal open={!!product} onClose={onClose} maxWidthClass="max-w-3xl">
@@ -47,7 +41,6 @@ export default function QuickViewModal({ product, onClose }: { product: Product 
           <div>
             <p className="text-xs uppercase tracking-wide text-ink-soft">{product.category}</p>
             <h2 className="mt-1 font-serif text-2xl text-ink">{product.name}</h2>
-            <Rating value={product.rating} count={product.reviewCount} className="mt-2" />
           </div>
           <PriceTag price={product.price} discountPrice={product.discountPrice} size="lg" />
           <p className="text-sm leading-relaxed text-ink-soft">{product.description}</p>
@@ -56,7 +49,7 @@ export default function QuickViewModal({ product, onClose }: { product: Product 
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink">Colour</p>
             <div className="flex gap-2">
               {product.colors.map((c) => (
-                <ColorSwatch key={c.name} color={c} selected={color === c.name} onClick={() => setColor(c.name)} />
+                <ColorSwatch key={c.name} color={c} selected={color === c.name} onClick={() => selectColor(c)} />
               ))}
             </div>
           </div>
@@ -79,9 +72,9 @@ export default function QuickViewModal({ product, onClose }: { product: Product 
           </div>
 
           <div className="mt-2 flex items-center gap-3">
-            <Button variant="primary" size="md" fullWidth disabled={!product.inStock} onClick={handleAdd}>
-              {!product.inStock ? "Out of Stock" : addedToBag ? "View Cart" : "Add to Bag"}
-            </Button>
+            <div className="flex-1">
+              <NotifyMe product={product} size={size} color={color} disabled={!product.inStock} />
+            </div>
             <button
               onClick={() => toggleWishlist(product)}
               aria-label="Toggle wishlist"

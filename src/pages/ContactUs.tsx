@@ -4,16 +4,27 @@ import Breadcrumb from "../components/ui/Breadcrumb";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { useToast } from "../context/ToastContext";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function ContactUs() {
+  useDocumentMeta({
+    title: "Contact Us | Pip & Panda",
+    description: "Get in touch with Pip & Panda for questions, feedback, or support.",
+  });
+
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const { showToast } = useToast();
 
+  // TRUST-01: this used to show a fake "sent" toast with no real destination.
+  // With no form backend or email API configured yet, opening a pre-filled
+  // mailto draft is the one option that's honest about what actually happens.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
-    showToast("Thanks for reaching out! Our team will get back to you within 24 hours.");
-    setForm({ name: "", email: "", message: "" });
+    const subject = encodeURIComponent(`Website enquiry from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} (${form.email})`);
+    window.location.href = `mailto:care@pipandpanda.in?subject=${subject}&body=${body}`;
+    showToast("Opening your email app to send this to our team.");
   };
 
   return (

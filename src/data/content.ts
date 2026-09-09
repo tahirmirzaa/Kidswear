@@ -44,7 +44,6 @@ export const faqs = [
     items: [
       { q: "What payment methods do you accept?", a: "We accept prepaid payments only: all major credit and debit cards, UPI, and net banking. Cash on Delivery is not available." },
       { q: "Can I modify or cancel my order after placing it?", a: "You can cancel or edit your order within 2 hours of placing it from the Order Tracking page. After that, our fulfilment team may have already begun packing it." },
-      { q: "Do you offer EMI options?", a: "Yes, EMI is available on orders above ₹3,000 through select bank cards at checkout." },
     ],
   },
   {

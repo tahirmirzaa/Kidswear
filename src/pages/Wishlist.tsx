@@ -6,8 +6,10 @@ import QuickViewModal from "../components/product/QuickViewModal";
 import EmptyState from "../components/ui/EmptyState";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import type { Product } from "../types";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function Wishlist() {
+  useDocumentMeta({ title: "Wishlist | Pip & Panda", noindex: true });
   const { products } = useWishlist();
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 

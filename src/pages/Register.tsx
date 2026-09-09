@@ -5,8 +5,10 @@ import PasswordInput from "../components/ui/PasswordInput";
 import Button from "../components/ui/Button";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function Register() {
+  useDocumentMeta({ title: "Create Account | Pip & Panda", noindex: true });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

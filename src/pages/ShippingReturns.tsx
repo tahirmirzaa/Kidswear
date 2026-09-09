@@ -1,5 +1,6 @@
 import { Truck, RotateCcw, ShieldCheck, Clock } from "lucide-react";
 import Breadcrumb from "../components/ui/Breadcrumb";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 const sections = [
   {
@@ -42,6 +43,11 @@ const sections = [
 ];
 
 export default function ShippingReturns() {
+  useDocumentMeta({
+    title: "Shipping & Returns | Pip & Panda",
+    description: "Delivery timelines, free shipping threshold, and the 7-day return and exchange policy at Pip & Panda.",
+  });
+
   return (
     <div className="container-page py-8">
       <Breadcrumb items={[{ label: "Shipping & Returns" }]} />

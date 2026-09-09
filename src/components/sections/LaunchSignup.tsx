@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useToast } from "../../context/ToastContext";
+import { LAUNCH_SIGNUPS_KEY, CONSENT_VERSION, CONSENT_TEXT, hasSignedUp, type LaunchSignupRecord } from "../../lib/launchSignups";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
+// WAIT-01: record what the visitor actually agreed to (wording + version)
+// and when, not just the bare email, so the consent is auditable later. No
+// email provider is wired up yet, so this still only writes to localStorage;
+// a real destination is an owner/infra decision, not something to fabricate.
 export default function LaunchSignup() {
-  const [signups, setSignups] = useLocalStorage<string[]>("ta-launch-signups", []);
+  const [signups, setSignups] = useLocalStorage<LaunchSignupRecord[]>(LAUNCH_SIGNUPS_KEY, []);
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
@@ -21,11 +26,11 @@ export default function LaunchSignup() {
       setError("Please confirm you'd like to hear from us");
       return;
     }
-    if (signups.includes(email)) {
+    if (hasSignedUp(signups, email)) {
       setError("You're already on the list");
       return;
     }
-    setSignups((prev) => [...prev, email]);
+    setSignups((prev) => [...prev, { email, consentText: CONSENT_TEXT, consentVersion: CONSENT_VERSION, date: new Date().toISOString() }]);
     setEmail("");
     setConsent(false);
     setError("");
@@ -62,9 +67,9 @@ export default function LaunchSignup() {
               onChange={(e) => setConsent(e.target.checked)}
               className="mt-0.5 h-4 w-4 rounded border-line accent-burgundy"
             />
-            I'd like to receive an email when Pip & Panda launches.
+            {CONSENT_TEXT}
           </label>
-          {error && <p className="text-left text-xs text-sale">{error}</p>}
+          {error && <p role="alert" className="text-left text-xs text-sale">{error}</p>}
         </form>
       </div>
     </section>

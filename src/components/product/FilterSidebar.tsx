@@ -2,11 +2,10 @@ import { AccordionItem } from "../ui/Accordion";
 import ColorSwatch from "../ui/ColorSwatch";
 import type { FilterState } from "../../hooks/useProductFilters";
 import { launchFilterOptions } from "../../data/products";
+import { launchCollections } from "../../data/taxonomy";
 import { formatINR } from "../../lib/utils";
 
-const AGE_OPTIONS = launchFilterOptions.ageGroups;
 const GENDER_OPTIONS = ["girls", "boys", "unisex"];
-const CATEGORY_OPTIONS = launchFilterOptions.categories;
 const SIZE_OPTIONS = launchFilterOptions.sizes;
 const COLOR_OPTIONS = [
   { name: "Ivory", hex: "#FAF7F2" },
@@ -24,14 +23,11 @@ const COLOR_OPTIONS = [
   { name: "Festive Gold", hex: "#C9A24B" },
   { name: "Washed Indigo", hex: "#465A78" },
 ];
-const FABRIC_OPTIONS = launchFilterOptions.fabrics;
-const OCCASION_OPTIONS = launchFilterOptions.occasions;
 
 interface FilterSidebarProps {
   filters: FilterState;
   toggleValue: (key: keyof FilterState, value: string) => void;
   setMaxPrice: (value: number) => void;
-  setInStockOnly: (value: boolean) => void;
   resetFilters: () => void;
   activeCount: number;
 }
@@ -50,7 +46,7 @@ function CheckboxRow({ label, checked, onChange }: { label: string; checked: boo
   );
 }
 
-export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setInStockOnly, resetFilters, activeCount }: FilterSidebarProps) {
+export default function FilterSidebar({ filters, toggleValue, setMaxPrice, resetFilters, activeCount }: FilterSidebarProps) {
   return (
     <div>
       <div className="flex items-center justify-between pb-3">
@@ -62,9 +58,14 @@ export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setIn
         )}
       </div>
 
-      <AccordionItem title="Age" defaultOpen>
-        {AGE_OPTIONS.map((a) => (
-          <CheckboxRow key={a} label={a} checked={filters.ageGroups.includes(a)} onChange={() => toggleValue("ageGroups", a)} />
+      <AccordionItem title="Collection" defaultOpen>
+        {launchCollections.map((c) => (
+          <CheckboxRow
+            key={c.slug}
+            label={c.label}
+            checked={filters.collections.includes(c.slug)}
+            onChange={() => toggleValue("collections", c.slug)}
+          />
         ))}
       </AccordionItem>
 
@@ -74,13 +75,7 @@ export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setIn
         ))}
       </AccordionItem>
 
-      <AccordionItem title="Category">
-        {CATEGORY_OPTIONS.map((c) => (
-          <CheckboxRow key={c} label={c} checked={filters.categories.includes(c)} onChange={() => toggleValue("categories", c)} />
-        ))}
-      </AccordionItem>
-
-      <AccordionItem title="Size">
+      <AccordionItem title="Size" defaultOpen>
         <div className="flex flex-wrap gap-2 pt-1">
           {SIZE_OPTIONS.map((s) => (
             <button
@@ -108,34 +103,18 @@ export default function FilterSidebar({ filters, toggleValue, setMaxPrice, setIn
         <div className="pt-1">
           <input
             type="range"
-            min={500}
-            max={6000}
-            step={100}
+            min={launchFilterOptions.minPrice}
+            max={launchFilterOptions.maxPrice}
+            step={50}
             value={filters.maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="w-full accent-burgundy"
           />
           <div className="mt-1 flex justify-between text-xs text-ink-soft">
-            <span>{formatINR(500)}</span>
+            <span>{formatINR(launchFilterOptions.minPrice)}</span>
             <span className="font-medium text-ink">Up to {formatINR(filters.maxPrice)}</span>
           </div>
         </div>
-      </AccordionItem>
-
-      <AccordionItem title="Fabric">
-        {FABRIC_OPTIONS.map((f) => (
-          <CheckboxRow key={f} label={f} checked={filters.fabrics.includes(f)} onChange={() => toggleValue("fabrics", f)} />
-        ))}
-      </AccordionItem>
-
-      <AccordionItem title="Occasion">
-        {OCCASION_OPTIONS.map((o) => (
-          <CheckboxRow key={o} label={o} checked={filters.occasions.includes(o)} onChange={() => toggleValue("occasions", o)} />
-        ))}
-      </AccordionItem>
-
-      <AccordionItem title="Availability">
-        <CheckboxRow label="In Stock Only" checked={filters.inStockOnly} onChange={() => setInStockOnly(!filters.inStockOnly)} />
       </AccordionItem>
     </div>
   );

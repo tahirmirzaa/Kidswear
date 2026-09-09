@@ -30,6 +30,9 @@ export type Fabric =
 export interface ColorOption {
   name: string;
   hex: string;
+  /** Slug of the sibling product variant this colour navigates to, when the
+   * colour represents a separate SKU rather than a decorative multi-tone swatch. */
+  slug?: string;
 }
 
 export interface Review {

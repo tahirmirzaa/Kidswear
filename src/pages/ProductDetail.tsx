@@ -1,27 +1,24 @@
 import { useMemo, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ShieldCheck, Sparkles, Truck, RotateCcw } from "lucide-react";
-import { getProductBySlug, getRelatedProducts, getCompleteTheLook } from "../data/products";
+import { getProductBySlug, getRelatedProducts } from "../data/products";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import ProductGallery from "../components/product/ProductGallery";
 import PriceTag from "../components/ui/PriceTag";
 import ColorSwatch from "../components/ui/ColorSwatch";
-import Button from "../components/ui/Button";
 import Accordion, { AccordionItem } from "../components/ui/Accordion";
 import PincodeCheck from "../components/product/PincodeCheck";
 import SizeGuideModal from "../components/product/SizeGuideModal";
 import ProductCarousel from "../components/product/ProductCarousel";
 import QuickViewModal from "../components/product/QuickViewModal";
+import NotifyMe from "../components/product/NotifyMe";
 import SectionHeading from "../components/ui/SectionHeading";
-import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useRecentlyViewed } from "../hooks/useRecentlyViewed";
-import { useToast } from "../context/ToastContext";
-import { launchCollections, launchSizes } from "../data/taxonomy";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { launchCollections } from "../data/taxonomy";
 import type { Product } from "../types";
 import NotFound from "./NotFound";
-
-const LAUNCH_SIZE_LABELS = launchSizes.map((s) => s.label);
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -29,57 +26,40 @@ export default function ProductDetail() {
 
   if (!product) return <NotFound />;
 
-  return <ProductDetailContent product={product} />;
+  return <ProductDetailContent key={product.id} product={product} />;
 }
 
 function ProductDetailContent({ product }: { product: Product }) {
-  const [color, setColor] = useState(product.colors[0]?.name ?? "");
+  // Sibling colourways all share the same `colors` list (so navigating between
+  // them shows the same swatches), so the *default* selected colour must be
+  // looked up by matching this product's own slug, not just colors[0].
+  const ownColor = product.colors.find((c) => c.slug === product.slug) ?? product.colors[0];
+  const [color, setColor] = useState(ownColor?.name ?? "");
   const [size, setSize] = useState<string | null>(null);
-  const [addedToBag, setAddedToBag] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const navigate = useNavigate();
-  const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
-  const { showToast } = useToast();
   const recentlyViewed = useRecentlyViewed(product.id).filter((p) => p.id !== product.id);
   const related = useMemo(() => getRelatedProducts(product), [product]);
-  const completeLook = useMemo(() => getCompleteTheLook(product), [product]);
   const collection = launchCollections.find((c) => c.slug === product.launchCollection);
   const collectionLabel = collection?.label ?? product.category;
   const collectionTo = collection ? `/category/${collection.slug}` : "/new-arrivals";
-  const availableSizes = product.sizes.filter((s) => LAUNCH_SIZE_LABELS.includes(s));
+  const sizeRange = product.sizes.length > 1 ? product.sizes.join(", ") : product.sizes[0];
 
-  const handleAddToBag = () => {
-    if (addedToBag) {
-      navigate("/bag");
+  useDocumentMeta({
+    title: `${product.name} | Pip & Panda`,
+    description: `${product.description} Available in ${product.sizes.length > 1 ? "sizes" : "size"} ${sizeRange}, ages 2-6.`,
+  });
+
+  const selectSize = (s: string) => setSize(s);
+
+  const selectColor = (c: (typeof product.colors)[number]) => {
+    if (c.slug && c.slug !== product.slug) {
+      navigate(`/product/${c.slug}`);
       return;
     }
-    if (!size) {
-      showToast("Please select a size");
-      return;
-    }
-    addItem(product, size, color, 1);
-    setAddedToBag(true);
-  };
-
-  const selectSize = (s: string) => {
-    setSize(s);
-    setAddedToBag(false);
-  };
-
-  const selectColor = (c: string) => {
-    setColor(c);
-    setAddedToBag(false);
-  };
-
-  const handleBuyNow = () => {
-    if (!size) {
-      showToast("Please select a size");
-      return;
-    }
-    addItem(product, size, color, 1);
-    window.location.href = "/checkout";
+    setColor(c.name);
   };
 
   return (
@@ -108,7 +88,7 @@ function ProductDetailContent({ product }: { product: Product }) {
             </p>
             <div className="flex gap-2">
               {product.colors.map((c) => (
-                <ColorSwatch key={c.name} color={c} selected={color === c.name} onClick={() => selectColor(c.name)} />
+                <ColorSwatch key={c.name} color={c} selected={color === c.name} onClick={() => selectColor(c)} />
               ))}
             </div>
           </div>
@@ -116,14 +96,14 @@ function ProductDetailContent({ product }: { product: Product }) {
           <div>
             <div className="mb-2 flex items-center justify-between">
               <p className="text-xs font-semibold uppercase tracking-wide text-ink">
-                Age / Size {size && <span className="font-normal text-ink-soft">· {size}</span>}
+                Size {size && <span className="font-normal text-ink-soft">· {size}</span>}
               </p>
               <button onClick={() => setSizeGuideOpen(true)} className="text-xs font-medium text-burgundy underline underline-offset-2">
                 Size Guide
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
-              {availableSizes.map((s) => (
+              {product.sizes.map((s) => (
                 <button
                   key={s}
                   onClick={() => selectSize(s)}
@@ -135,15 +115,10 @@ function ProductDetailContent({ product }: { product: Product }) {
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-xs text-ink-soft">Suitable for ages 2-6</p>
+            <p className="mt-2 text-xs text-ink-soft">Available in {product.sizes.length > 1 ? "sizes" : "size"} {sizeRange}</p>
           </div>
 
-          <Button variant="primary" size="lg" fullWidth disabled={!product.inStock} onClick={handleAddToBag}>
-            {!product.inStock ? "Out of Stock" : addedToBag ? "View Cart" : "Add to Bag"}
-          </Button>
-          <Button variant="outline" size="lg" fullWidth disabled={!product.inStock} onClick={handleBuyNow}>
-            Buy Now
-          </Button>
+          <NotifyMe product={product} size={size} color={color} disabled={!product.inStock} />
 
           <div className="rounded-xl border border-line p-4">
             <PincodeCheck />
@@ -175,7 +150,7 @@ function ProductDetailContent({ product }: { product: Product }) {
             <AccordionItem title="Delivery & Returns">
               <div className="flex flex-col gap-2">
                 <span className="flex items-center gap-2">
-                  <Truck size={15} className="text-burgundy" /> Free delivery on prepaid orders above ₹1,499
+                  <Truck size={15} className="text-burgundy" /> Free delivery on prepaid orders of ₹1,499 or more
                 </span>
                 <span className="flex items-center gap-2">
                   <RotateCcw size={15} className="text-burgundy" /> 7-day returns & exchanges after delivery
@@ -188,13 +163,6 @@ function ProductDetailContent({ product }: { product: Product }) {
           </Accordion>
         </div>
       </div>
-
-      {completeLook.length > 0 && (
-        <section className="mt-16 border-t border-line pt-12">
-          <SectionHeading eyebrow="Style It Together" title="Complete the Look" />
-          <ProductCarousel products={completeLook} onQuickView={setQuickViewProduct} />
-        </section>
-      )}
 
       {related.length > 0 && (
         <section className="mt-16 border-t border-line pt-12">

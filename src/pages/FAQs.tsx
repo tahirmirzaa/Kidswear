@@ -3,8 +3,14 @@ import { Search } from "lucide-react";
 import Breadcrumb from "../components/ui/Breadcrumb";
 import Accordion, { AccordionItem } from "../components/ui/Accordion";
 import { faqs } from "../data/content";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function FAQs() {
+  useDocumentMeta({
+    title: "FAQs | Pip & Panda",
+    description: "Answers to common questions about orders, payment, shipping, returns and sizing at Pip & Panda.",
+  });
+
   const [query, setQuery] = useState("");
 
   const filtered = faqs

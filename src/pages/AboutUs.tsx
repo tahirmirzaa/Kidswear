@@ -2,6 +2,7 @@ import Breadcrumb from "../components/ui/Breadcrumb";
 import { brandStory, productProof } from "../data/content";
 import { realPhoto } from "../lib/images";
 import { Leaf, ShieldCheck, Wind, Recycle } from "lucide-react";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 const icons: Record<string, React.ReactNode> = {
   leaf: <Leaf size={20} />,
@@ -11,6 +12,11 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 export default function AboutUs() {
+  useDocumentMeta({
+    title: "Our Story | Pip & Panda",
+    description: "The story behind Pip & Panda's cotton everyday sets and nightwear for children aged 2-6.",
+  });
+
   return (
     <div>
       <div className="relative flex h-56 items-center justify-center overflow-hidden bg-ink sm:h-72">

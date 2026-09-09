@@ -17,7 +17,7 @@ export default function ProductProof() {
         <SectionHeading
           align="center"
           eyebrow="Fabric and Fit"
-          title="What's Actually in Every Piece"
+          title="Comfort in Every Detail"
           description="Real construction details from our launch range, not marketing claims."
         />
         <HorizontalScroller>

@@ -10,7 +10,6 @@ interface MobileFilterDrawerProps {
   filters: FilterState;
   toggleValue: (key: keyof FilterState, value: string) => void;
   setMaxPrice: (value: number) => void;
-  setInStockOnly: (value: boolean) => void;
   resetFilters: () => void;
   activeCount: number;
 }

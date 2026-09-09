@@ -9,8 +9,10 @@ import Breadcrumb from "../components/ui/Breadcrumb";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import type { Address } from "../types";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function Account() {
+  useDocumentMeta({ title: "My Account | Pip & Panda", noindex: true });
   const { user, logout, updateProfile } = useAuth();
   const { orders } = useOrders();
   const { products } = useWishlist();

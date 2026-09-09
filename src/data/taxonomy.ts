@@ -82,12 +82,17 @@ export const launchCollections: LaunchCollectionCard[] = [
     slug: "everyday-sets",
     label: "Everyday Sets",
     description: "Cotton staples built for play, every single day.",
-    image: realPhoto("1599376672737-bd66af54c8f5"),
+    // Placeholder reference photo (garment clearly visible), pending real
+    // Pip & Panda catalogue photography.
+    image: realPhoto("1634188157846-c6e3bdf99420"),
   },
   {
     slug: "nightwear",
     label: "Nightwear",
     description: "Breathable cotton sets for sound sleep.",
-    image: realPhoto("1771419912747-df33d91c329d"),
+    // Swapped from a roadside/outdoor reference photo to a calm indoor scene
+    // (page 6: "nightwear should use a calm indoor setting"). Still a
+    // placeholder pending real Pip & Panda catalogue photography.
+    image: realPhoto("1522771930-78848d9293e8"),
   },
 ];

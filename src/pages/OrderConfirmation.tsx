@@ -4,9 +4,11 @@ import { useOrders } from "../context/OrdersContext";
 import { getProductById } from "../data/products";
 import Button from "../components/ui/Button";
 import { formatINR } from "../lib/utils";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import NotFound from "./NotFound";
 
 export default function OrderConfirmation() {
+  useDocumentMeta({ title: "Order Confirmed | Pip & Panda", noindex: true });
   const { orderId } = useParams();
   const { getOrder } = useOrders();
   const order = getOrder(orderId ?? "");

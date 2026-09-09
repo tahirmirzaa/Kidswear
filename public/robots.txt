@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /addresses
+Disallow: /bag
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /order-confirmation/
+Disallow: /orders/track
+Disallow: /wishlist
+Disallow: /search
+
+Sitemap: https://www.pipandpanda.com/sitemap.xml

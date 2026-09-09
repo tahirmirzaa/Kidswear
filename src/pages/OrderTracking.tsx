@@ -8,8 +8,10 @@ import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import EmptyState from "../components/ui/EmptyState";
 import { formatINR, cn } from "../lib/utils";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 export default function OrderTracking() {
+  useDocumentMeta({ title: "Track Your Order | Pip & Panda", noindex: true });
   const { orders, getOrder } = useOrders();
   const [params] = useSearchParams();
   const [searchId, setSearchId] = useState(params.get("id") ?? "");

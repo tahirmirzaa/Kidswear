@@ -9,6 +9,7 @@ import Input from "../components/ui/Input";
 import Modal from "../components/ui/Modal";
 import EmptyState from "../components/ui/EmptyState";
 import type { Address } from "../types";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 
 type AddressType = Address["type"];
 
@@ -24,6 +25,7 @@ const emptyForm: Omit<Address, "id"> = {
 };
 
 export default function Addresses() {
+  useDocumentMeta({ title: "My Addresses | Pip & Panda", noindex: true });
   const { user } = useAuth();
   const [addresses, setAddresses] = useLocalStorage<Address[]>("ta-addresses", []);
   const [modalOpen, setModalOpen] = useState(false);

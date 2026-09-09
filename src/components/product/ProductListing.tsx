@@ -23,7 +23,7 @@ interface ProductListingProps {
 const PAGE_SIZE = 8;
 
 export default function ProductListing({ title, description, bannerImage, breadcrumbLabel, products }: ProductListingProps) {
-  const { filters, toggleValue, setMaxPrice, setInStockOnly, resetFilters, activeCount, sort, setSort, filtered } =
+  const { filters, toggleValue, setMaxPrice, resetFilters, activeCount, sort, setSort, filtered } =
     useProductFilters(products);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
@@ -52,7 +52,6 @@ export default function ProductListing({ title, description, bannerImage, breadc
             filters={filters}
             toggleValue={toggleValue}
             setMaxPrice={setMaxPrice}
-            setInStockOnly={setInStockOnly}
             resetFilters={resetFilters}
             activeCount={activeCount}
           />
@@ -103,7 +102,6 @@ export default function ProductListing({ title, description, bannerImage, breadc
         filters={filters}
         toggleValue={toggleValue}
         setMaxPrice={setMaxPrice}
-        setInStockOnly={setInStockOnly}
         resetFilters={resetFilters}
         activeCount={activeCount}
       />

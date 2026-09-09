@@ -4,10 +4,10 @@ import { realPhoto } from "../../lib/images";
 
 export default function HeroBanner() {
   return (
-    <section className="relative flex h-[92svh] max-h-[880px] min-h-[440px] items-end overflow-hidden bg-ink">
+    <section className="relative flex h-[65svh] min-h-[420px] max-h-[720px] items-end overflow-hidden bg-ink sm:h-[70vh]">
       <img
         src={realPhoto("1516890896652-41ca1a35787c", 1800)}
-        alt="Child in cotton everyday wear from Pip & Panda's launch range"
+        alt="Reference photograph of a child playing outdoors, used as a placeholder until Pip & Panda's own product photography is ready"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-ink/10" />
